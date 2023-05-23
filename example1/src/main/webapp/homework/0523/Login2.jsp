@@ -12,7 +12,7 @@
 boolean isLogin = session.getAttribute("id") != null;
 
 if(isLogin) {
-	//로그인인 되어있으면 메인서비스 페이지로 이동
+	//로그인이 되어있으면 메인서비스 페이지로 이동
 	response.sendRedirect("Main.jsp");
 } else {
 //로그인 안 되어있으면 id, pw 입력받아서 로그인서블릿로 id,pw 넘김
