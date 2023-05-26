@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+
 	BookVO[] book1 = new BookVO[2];
 	for (int i = 0; i < book1.length; i++) {
 		book1[i] = new BookVO();		
