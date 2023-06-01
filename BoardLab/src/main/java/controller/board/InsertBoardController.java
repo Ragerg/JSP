@@ -1,4 +1,4 @@
-package biz.board;
+package controller.board;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import biz.board.BoardDAO;
+import biz.board.BoardVO;
 import biz.user.UserVO;
 import controller.Controller;
 
@@ -34,6 +36,6 @@ public class InsertBoardController implements Controller {
 		BoardDAO dao = new BoardDAO();
 		dao.insertBoard(vo);
 		
-		return "ok.jsp";
+		return "getBoardList.do";
 	}
 }
