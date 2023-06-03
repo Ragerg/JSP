@@ -13,7 +13,7 @@
 <h3>${ user.name }님 환영합니다. <a href="logout.do">로그아웃</a></h3>
 	<table>	
 		<tr>
-			<th>No.</th><th>TITLE</th><th>WRITER</th><th>DATE</th>
+			<th>No.</th><th>TITLE</th><th>WRITER</th><th>DATE</th><th>HIT</th>
 		</tr>
 		<c:forEach var="board" items="${ boardList }">
 		<tr>
@@ -21,9 +21,25 @@
 			<td><a href="getboard.do?seq=${ board.seq }" >${ board.title }</a></td>
 			<td>${ board.writer }</td>
 			<td>${ board.regDate }</td>
+			<td>${ board.hit }</td>
 		</tr>
 		</c:forEach>
+		<tr>
+		<td colspan="4"><a href="./insertBoard.jsp">글쓰기</a></td>
+		</tr>
 	</table>
-<a href="./insertBoard.jsp">글쓰기</a>
+<hr>
+<form action="searchboard.do" method="post">
+	<table>
+		<tr>
+			<td>
+			<input type="text" name="writer">
+			</td>
+			<td>
+			<input type="submit" value="검색">
+			</td>
+		</tr>
+	</table>
+</form>
 </body>
 </html>

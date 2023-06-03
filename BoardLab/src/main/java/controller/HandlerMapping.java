@@ -3,9 +3,12 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import controller.board.DeleteBoardController;
 import controller.board.GetBoardController;
 import controller.board.GetBoardListController;
 import controller.board.InsertBoardController;
+import controller.board.SearchBoardController;
+import controller.board.UpdateBoardController;
 import controller.user.InsertUserController;
 import controller.user.LoginController;
 import controller.user.LogoutController;
@@ -21,6 +24,9 @@ public class HandlerMapping {
 		mappings.put("/insertBoard.do", new InsertBoardController());
 		mappings.put("/getBoardList.do", new GetBoardListController());
 		mappings.put("/getboard.do", new GetBoardController());
+		mappings.put("/updateboard.do", new UpdateBoardController());
+		mappings.put("/deleteboard.do", new DeleteBoardController());
+		mappings.put("/searchboard.do", new SearchBoardController());
 	}
 	
 	public Controller getController(String path) {

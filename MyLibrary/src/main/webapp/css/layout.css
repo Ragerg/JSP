@@ -1,31 +1,53 @@
 @charset "UTF-8";
 
+/* 전체 페이지 스타일 */
 body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  font-family: verdana, sans-serif;
-  font-size: 15px;
 }
 
+/* 헤더 스타일 */
 header {
-  margin-top: 1%;
-  margin-left: 15%;
-  margin-right: 15%;
-  min-height: 70px;
-  /* background-color: pink; */
+  background-color: black;
+  padding: 20px;
+  text-align: center;
 }
 
+header img {
+  margin: 0;
+  width: 30%;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+/* 섹션 스타일 */
 section {
-  margin-left: 17%;
-  margin-right: 17%;
-  height: 400px;
-  /* background-color: lightyellow; */
-  padding: 20px;
+  padding: 40px;
 }
 
+section h2 {
+  margin-top: 0;
+}
+
+/* 푸터 스타일 */
 footer {
-  margin-left: 15%;
-  margin-right: 15%;
-  /* background-color: skyblue; */
+  background-color: #333;
+  color: #fff;
   padding: 20px;
+  text-align: center;
 }

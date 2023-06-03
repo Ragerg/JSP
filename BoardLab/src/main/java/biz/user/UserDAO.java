@@ -35,7 +35,6 @@ public class UserDAO {
 	}
 	
 	public UserVO loginUser(UserVO vo) {
-//		boolean isLogin = false;
 		UserVO user = null;
 		try {
 			conn = JDBCUtil.getConnection();
@@ -45,7 +44,6 @@ public class UserDAO {
 			
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
-//				isLogin = true;
 				user = new UserVO();
 				user.setId(rs.getString("id"));
 				user.setPassword(rs.getString("password"));

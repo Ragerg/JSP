@@ -8,19 +8,21 @@ public class BoardVO {
 	private String writer;
 	private String content;
 	private Date regDate;
+	private int hit;
 	
 	public BoardVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public BoardVO(int seq, String title, String writer, String content, Date regDate) {
+	public BoardVO(int seq, String title, String writer, String content, Date regDate, int hit) {
 		super();
 		this.seq = seq;
 		this.title = title;
 		this.writer = writer;
 		this.content = content;
 		this.regDate = regDate;
+		this.hit = hit;
 	}
 
 	public int getSeq() {
@@ -61,6 +63,14 @@ public class BoardVO {
 
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+	
+	public int getHit() {
+		return hit;
+	}
+	
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
 	
 	

@@ -42,11 +42,10 @@ public class DispatcherServlet extends HttpServlet {
 
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
-		String path = uri.substring(uri.lastIndexOf("/"));
+		String path = uri.substring(request.getContextPath().length());
 		
 		Controller ctrl = mapping.getController(path);
 		String viewPage = ctrl.handleRequest(request, response);
-		
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);
 	}

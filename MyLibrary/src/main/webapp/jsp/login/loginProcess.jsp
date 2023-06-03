@@ -56,7 +56,7 @@
 			session.setAttribute("loginUser", loginUser);
 		} else {
 			msg = "입력하신 ID 또는 패스워드가 잘못 되었습니다";
-			locUrl = "login.jsp";
+			locUrl = "/MyLibrary";
 		}
 		
 		pageContext.setAttribute("msg", msg);
