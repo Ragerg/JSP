@@ -127,7 +127,8 @@
                       </div>
                       <%-- 관리페이지, 로그아웃 링크 --%>
                         <div>
-                          <a href="${ pageContext.request.contextPath }/managerPage.do">관리자페이지</a> |
+<%--                           <a href="${ pageContext.request.contextPath }/managerPage.do">관리자페이지</a> | --%>
+                          <a href="${ pageContext.request.contextPath }/insertBookPage.do">관리자페이지</a> |
                           <a href="${ pageContext.request.contextPath }/logout.do">로그아웃</a>
                         </div>
                   </section>

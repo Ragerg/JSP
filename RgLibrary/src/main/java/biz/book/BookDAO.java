@@ -11,8 +11,8 @@ public class BookDAO {
 	private PreparedStatement stmt;
 	private ResultSet rs;
 
-	private static String BOOK_INSERT = "insert into t_member(isbn, title, author, publisher, pubdate, description, image) "
-			+ " values(?, ?, ?, ?, ?, ?, ?) ";
+	private static String BOOK_INSERT = "insert into t_book(regno, isbn, title, author, publisher, pubdate, description, image) "
+			+ " values(seq_t_book_regno.nextval, ?, ?, ?, ?, ?, ?, ?) ";
 
 	// 책 추가
 	public void insertBook(BookVO vo) {

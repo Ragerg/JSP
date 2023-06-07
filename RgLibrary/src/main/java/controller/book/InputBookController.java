@@ -37,8 +37,9 @@ public class InputBookController implements Controller {
 
 
 	        String text = null;
+	        String isbn = request.getParameter("isbn");
 	        try {
-	            text = URLEncoder.encode("9788959895205", "UTF-8"); // 검색어
+	            text = URLEncoder.encode(isbn, "UTF-8"); // 검색어
 	        } catch (UnsupportedEncodingException e) {
 	            throw new RuntimeException("검색어 인코딩 실패",e);
 	        }
@@ -69,7 +70,6 @@ public class InputBookController implements Controller {
 			// JSONArray bookInfoResult 에서 하나씩 JSONObject로 변환해서 프린트하기
 	        JSONObject jsonObj = (JSONObject)bookInfoResult.get(0);
 	        
-	        String isbn = (String)jsonObj.get("isbn"); 
 	        String title = (String)jsonObj.get("title"); 
 	        String author = (String)jsonObj.get("author"); 
 	        String publisher = (String)jsonObj.get("publisher"); 
@@ -87,7 +87,8 @@ public class InputBookController implements Controller {
 	        vo.setImage(image);
 	        
 	        request.setAttribute("vo", vo);
-	        return "insertBook.jsp";
+	        
+	        return "/jsp/book/insertBookPage.jsp";
 	}
 
 

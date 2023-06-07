@@ -26,7 +26,7 @@ public class LoginProcessController implements Controller {
 			session.setAttribute("member", member);
 			return "main.do";
 		} else {
-			return "/jsp/login/loginProcess.jsp";
+			return "/jsp/login/loginError.jsp";
 		}
 	}
 }

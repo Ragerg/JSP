@@ -198,7 +198,7 @@
               </div>
 
 
-              <hr class="mb-4">ㄴ
+              <hr class="mb-4">
               <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="agreement" required>
                 <label class="custom-control-label" for="agreement">개인정보 수집 및 이용에 동의합니다.</label>

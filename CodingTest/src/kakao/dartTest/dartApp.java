@@ -11,7 +11,7 @@ public class dartApp {
 		
 		DartResultAnalyzer ra = new DartResultAnalyzer(dartResult);
 		int Dartscore = ra.getDartScore();
-		String dartScoreEquation = ra.getDartScoreEquaton();
+		String dartScoreEquation = ra.getDartScoreEquation();
 		
 		System.out.printf("score : %s   equation  : %s", Dartscore, dartScoreEquation);
 		

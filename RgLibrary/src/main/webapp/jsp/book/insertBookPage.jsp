@@ -50,53 +50,33 @@
     </style>
 
     <script>
-      //isbn 숫자 13자리
-      function validateISBN(isbn) {
-        var regex = /^\d{13}$/;
-        return regex.test(isbn);
+      // isbn으로 책정보 불러오기
+      function inputBook() {
+    	 location.href="${ pageContext.request.contextPath }/inputBook.do?isbn=" + document.getElementById('isbn').value;
+      }
+    
+      // 폼 입력 유효성 검사
+      function validateForm() {
+        let field = document.getElementById('isbn');
+        let isValid = true;
+
+        if (field.classList.contains('is-invalid')) {
+          isValid = false;
+        } else if (field.value.trim() === '') {
+          field.classList.add('is-invalid');
+          field.focus();
+          isValid = false;
+        } else {
+          field.classList.remove('is-invalid');
+        }
+        return isValid;
       }
 
-   // 폼 입력 유효성 검사
-	    function validateForm() {
-	    	const requiredFields = ['id', 'pw', 'pw2', 'name', 'address', 'phone'];
-	    	let isValid = true;
-
-	    	  for (var i = 0; i < requiredFields.length; i++) {
-	    		let field = document.getElementById(requiredFields[i]);
-	    		const regex = /^\d{13}$/;
-	    	    
-	    		if(i === 0) {
-	    	    	if(field.classList.contains('is-invalid')){
-	    	    		isValid = false;	
-	    	    	}  
-	    	  	} else if(field.id === 'phone' && !regex.test(field.value)){
-	    	  		field.classList.add("is-invalid");
-	    	        isValid = false;
-	    	  	} else if (field.value.trim() === '') {
-		    	      field.classList.add('is-invalid');
-		    	      field.focus();
-		    	      isValid = false;
-	    	  	} else {
-		    	      field.classList.remove('is-invalid');
-		     	} 
-	    	  }
-
-	    	 var agreement = document.getElementById('agreement');
-	    	  if (!agreement.checked) {
-	    	    agreement.classList.add('is-invalid');
-	    	    isValid = false;
-	    	  } else {
-	    	    agreement.classList.remove('is-invalid');
-	    	  } 
-
-	    	  return isValid;
-	    }
-
-	    // 입력 값 변경 시 유효성 검사 클래스 제거
-	    function clearValidation(inputId) {
-	      var input = document.getElementById(inputId);
-	      input.classList.remove('is-invalid');
-	    }
+      // 입력 값 변경 시 유효성 검사 클래스 제거
+      function clearValidation(inputId) {
+        var input = document.getElementById(inputId);
+        input.classList.remove('is-invalid');
+      }
     </script>
 
   </head>
@@ -111,13 +91,18 @@
           <div class="input-form col-md-12 mx-auto">
             <h4 class="mb-3">도서등록</h4>
             <form class="validation-form" novalidate method="post"
-              action="${ pageContext.request.contextPath }/insertBook.do">
+              action="${ pageContext.request.contextPath }/insertBook.do" onsubmit="return validateForm()">
               <div class="row">
                 <div class="col-md-6 mb-3">
-                  <label for="isbn">ISBN</label>
-                  <input type="text" class="form-control is-invalid" id="isbn" name="isbn" value="${ vo.isbn }"
-                    placeholder="ISBN 13자리를 입력해 주세요." required pattern="/^\d{13}$/s" required
-                    onchange = "validateForm()">
+                  <label for="isbn">ISBN(입력 후 조회하기 필수)</label>
+                  <input type="text" class="form-control " id="isbn" name="isbn" value="${ vo.isbn }"
+                    placeholder="ISBN 13자리를 입력해 주세요." required pattern="[0-9]{13}" required onchange="validateForm()">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <button type="button" class="btn btn-primary" onclick="inputBook()" id="check">조회하기</button>
+                </div>
+
+                <div class="col-md-6 mb-3">
                   제목
                   <input type="text" class="form-control" id="title" name="title" placeholder="" value="${ vo.title }"
                     readonly>
@@ -133,16 +118,19 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                  도서 표지
+                  도서 표지<br>
+                  <input type="hidden" name="image" value="${ vo.image }">
                   <c:if test="${ vo.image != null }">
                     <img src="${ vo.image }" alt="" id="image">
                   </c:if>
                 </div>
+
               </div>
+
               <div class="mb-3">
                 도서 설명
                 <textarea style="height: 200px;" class="form-control" id="description" name="description" placeholder=""
-                  value="${ vo.description }" readonly></textarea>
+                  readonly>${ vo.description }</textarea>
               </div>
 
 
