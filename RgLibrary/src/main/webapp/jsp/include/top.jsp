@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
     <style>
       a:hover {
         color: #FFD966;
         text-decoration: none;
       }
     </style>
-
     <!-- 로고와 도서관 이름 -->
     <a href="${ pageContext.request.contextPath }/main.do"><img src="${ pageContext.request.contextPath }/image/logo.png" /></a>
     <!-- 메뉴 바 -->
     <nav>
       <ul>
-        <li><a href="${ pageContext.request.contextPath }/main.do">홈</a></li>s
+        <li><a href="${ pageContext.request.contextPath }/main.do">홈</a></li>
         <li><a href="#about">소개</a></li>
         <li><a href="#search">도서 검색</a></li>
         <li><a href="#services">이용 안내</a></li>

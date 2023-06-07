@@ -4,8 +4,9 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <link rel="stylesheet" href="/RgLibrary/css/layout.css">
+    <title>로그인</title>
+    <link rel="icon" href="${ pageContext.request.contextPath }/image/favicon.png">
+    <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/layout.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
       integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
@@ -42,7 +43,7 @@
       input[type="text"],
       input[type="password"] {
         padding: 8px;
-        width: 300px;
+        width: 400px;
       }
 
       /* 로그인 폼 스타일 */
@@ -62,7 +63,7 @@
       }
 
       #loginBtn {
-        width: 300px;
+        width: 400px;
       }
 
       #login a {
