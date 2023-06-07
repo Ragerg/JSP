@@ -3,5 +3,5 @@ pageEncoding="UTF-8"%>
 <% session.invalidate(); %>
 <script>
   alert("로그아웃되었습니다");
-  location.href = "${ pageContext.request.contextPath }/main.do";
+  location.href = "/MyLibrary";
 </script>

@@ -3,7 +3,6 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import controller.book.InputBookController;
 import controller.user.IdCheckController;
 import controller.user.JoinController;
 import controller.user.JoinPageController;
@@ -23,8 +22,6 @@ public class HandlerMapping {
 		mappings.put("/loginPage.do", new LoginPageController());
 		mappings.put("/loginProcess.do", new LoginProcessController());
 		mappings.put("/logout.do", new LogoutController());
-//		mappings.put("/insertBookPage.do", new InsertBookPageController());
-		mappings.put("/inputBook.do", new InputBookController());
 	}
 	
 	public Controller getController(String path) {

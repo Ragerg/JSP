@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
-	<link rel="icon" href="${ pageContext.request.contextPath }/image/favicon.png">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/layout.css">
+    <link rel="stylesheet" href="/RgLibrary/css/layout.css">
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <style>
       .input-form {
@@ -87,48 +87,6 @@
 		  var data = "id=" + encodeURIComponent(id.value);
 		  xhr.send(data);
 		}
-      
-		// 폼 입력 유효성 검사
-	    function validateForm() {
-	    	const requiredFields = ['id', 'pw', 'pw2', 'name', 'address', 'phone'];
-	    	let isValid = true;
-
-	    	  for (var i = 0; i < requiredFields.length; i++) {
-	    		let field = document.getElementById(requiredFields[i]);
-	    		const regex = /^010-[0-9]{4}-[0-9]{4}$/;
-	    	    
-	    		if(i === 0) {
-	    	    	if(field.classList.contains('is-invalid')){
-	    	    		isValid = false;	
-	    	    	}  
-	    	  	} else if(field.id === 'phone' && !regex.test(field.value)){
-	    	  		field.classList.add("is-invalid");
-	    	        isValid = false;
-	    	  	} else if (field.value.trim() === '') {
-		    	      field.classList.add('is-invalid');
-		    	      field.focus();
-		    	      isValid = false;
-	    	  	} else {
-		    	      field.classList.remove('is-invalid');
-		     	} 
-	    	  }
-
-	    	 var agreement = document.getElementById('agreement');
-	    	  if (!agreement.checked) {
-	    	    agreement.classList.add('is-invalid');
-	    	    isValid = false;
-	    	  } else {
-	    	    agreement.classList.remove('is-invalid');
-	    	  } 
-
-	    	  return isValid;
-	    }
-
-	    // 입력 값 변경 시 유효성 검사 클래스 제거
-	    function clearValidation(inputId) {
-	      var input = document.getElementById(inputId);
-	      input.classList.remove('is-invalid');
-	    }
     </script>
 
   </head>
@@ -142,17 +100,17 @@
         <div class="input-form-backgroud row">
           <div class="input-form col-md-12 mx-auto">
             <h4 class="mb-3">회원가입</h4>
-            <form class="validation-form" novalidate method="post" action="${ pageContext.request.contextPath }/join.do" onsubmit="return validateForm()">
+            <form class="validation-form" novalidate method="post" action="${ pageContext.request.contextPath }/join.do">
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label for="id">ID</label>
-                  <input type="text" class="form-control is-invalid" id="id" name="id" placeholder="" required>
+                  <input type="text" class="form-control" id="id" name="id" placeholder="" required>
                   <div class="invalid-feedback">
-                    아이디 입력 후 중복확인을 꼭 눌러주세요.
+                    아이디를 입력해주세요.
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <button type="button" class="btn btn-primary" onclick="checkId()" id="check">중복확인</button>
+                  <button type="button" class="btn btn-primary" onclick="checkId()" id="check">중복 체크</button>
                 </div>
               </div>
               <div class="row">
@@ -181,7 +139,7 @@
               </div>
 
               <div class="mb-3">
-                <label for="address">주소(구/군 까지만 입력)</label>
+                <label for="address">주소</label>
                 <input type="text" class="form-control" id="address" name="address" placeholder="서울시 강남구" required>
                 <div class="invalid-feedback">
                   주소를 입력해주세요.
@@ -190,18 +148,18 @@
 
               <div class="mb-3">
                 <label for="phonNum">전화번호</label>
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="010-1234-1234"
-                  pattern="010-[0-9]{4}-[0-9]{4}" required>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="-없이 숫자만 입력해주세요"
+                  pattern="^\d{11}$" required>
                 <div class="invalid-feedback">
-                  전화번호를 형식에 맞게 입력해주세요.
+                  전화번호를 입력해주세요.
                 </div>
               </div>
 
 
-              <hr class="mb-4">ㄴ
+              <hr class="mb-4">
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="agreement" required>
-                <label class="custom-control-label" for="agreement">개인정보 수집 및 이용에 동의합니다.</label>
+                <input type="checkbox" class="custom-control-input" id="aggrement" required>
+                <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
               </div>
               <div class="mb-4"></div>
               <button class="btn btn-primary btn-lg btn-block" type="submit" >회원가입</button>
@@ -209,6 +167,22 @@
           </div>
         </div>
       </div>
+      <script>
+        window.addEventListener('load', () => {
+          const forms = document.getElementsByClassName('validation-form');
+
+          Array.prototype.filter.call(forms, (form) => {
+            form.addEventListener('submit', function (event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      </script>
     </section>
     <footer>
       <%@ include file="/jsp/include/bottom.jsp" %>
