@@ -25,8 +25,7 @@
             <%--로그인이 되어있는 경우--%>
 	            <%--관리자--%>
               <c:when test="${ member.role == 'M' }">
-<%--                 <li><a href="${ pageContext.request.contextPath }/myPage.do">관리자페이지</a></li> --%>
-				<li><a href="${ pageContext.request.contextPath }/insertBookPage.do">관리자페이지</a></li>
+                <li><a href="${ pageContext.request.contextPath }/managerPage.do">관리자페이지</a></li>
                 <li><a href="${ pageContext.request.contextPath }/logout.do">로그아웃</a></li>
               </c:when>
 	            <%--일반 사용자--%>

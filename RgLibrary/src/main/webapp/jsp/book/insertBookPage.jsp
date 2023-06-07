@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>도서등록</title>
+    <title>도서정보 등록</title>
     <link rel="icon" href="${ pageContext.request.contextPath }/image/favicon.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -89,7 +89,7 @@
       <div class="container">
         <div class="input-form-backgroud row">
           <div class="input-form col-md-12 mx-auto">
-            <h4 class="mb-3">도서등록</h4>
+            <h4 class="mb-3">도서정보 등록</h4>
             <form class="validation-form" novalidate method="post"
               action="${ pageContext.request.contextPath }/insertBook.do" onsubmit="return validateForm()">
               <div class="row">
@@ -139,7 +139,7 @@
 
               <hr class="mb-4">
               <div class="mb-4"></div>
-              <button class="btn btn-primary btn-lg btn-block" type="submit">책 등록하기</button>
+              <button class="btn btn-primary btn-lg btn-block" type="submit">도서정보 등록하기</button>
             </form>
           </div>
         </div>
