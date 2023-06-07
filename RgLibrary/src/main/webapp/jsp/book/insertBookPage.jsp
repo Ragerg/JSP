@@ -41,7 +41,7 @@
       }
 
       #image {
-        height: 300px;
+      	width: 290px;
       }
 
       /* .row-right {

@@ -68,8 +68,12 @@ public class InputBookController implements Controller {
 			}
 			JSONArray bookInfoResult = (JSONArray)jsonObject.get("items");
 			// JSONArray bookInfoResult 에서 하나씩 JSONObject로 변환해서 프린트하기
-	        JSONObject jsonObj = (JSONObject)bookInfoResult.get(0);
+			if(bookInfoResult.isEmpty()) {
+	        	return "/jsp/book/inputError.jsp";
+			} else {
+			JSONObject jsonObj = (JSONObject)bookInfoResult.get(0);
 	        
+	        isbn = (String)jsonObj.get("isbn"); 
 	        String title = (String)jsonObj.get("title"); 
 	        String author = (String)jsonObj.get("author"); 
 	        String publisher = (String)jsonObj.get("publisher"); 
@@ -88,7 +92,11 @@ public class InputBookController implements Controller {
 	        
 	        request.setAttribute("vo", vo);
 	        
+	        
+	        
 	        return "/jsp/book/insertBookPage.jsp";
+	        }
+	        
 	}
 
 

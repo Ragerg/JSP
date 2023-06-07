@@ -18,3 +18,6 @@ CREATE TABLE T_BOOK(
 );
 
 CREATE SEQUENCE SEQ_T_BOOK_REGNO NOCACHE;
+
+SELECT * FROM T_BOOK;
+delete from t_book where regno=1;
