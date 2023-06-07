@@ -2,79 +2,124 @@ package biz.book;
 
 public class BookVO {
 
-    private int regNo;
-    private String title;
-    private String writer;
-    private String publisher;
-    private int issueYear;
-    private String status;
+	private int regNo; //책번호
+	private String isbn; // isbn
+	private String title; // 책제목 
+	private String author; // 저자 
+	private String publisher; // 출판사 
+	private String pubdate; // 출판일
+	private String description; // 책소개
+	private String image; // 책표지 이미지 링크
+	private String regDate; // 도서관 책등록일
+	private int status; // 대여가능 여부
+	
+	public BookVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public BookVO() {
+	public BookVO(int regNo, String isbn, String title, String author, String publisher, String pubdate,
+			String description, String image, String regDate, int status) {
+		super();
+		this.regNo = regNo;
+		this.isbn = isbn;
+		this.title = title;
+		this.author = author;
+		this.publisher = publisher;
+		this.pubdate = pubdate;
+		this.description = description;
+		this.image = image;
+		this.regDate = regDate;
+		this.status = status;
+	}
 
-    }
+	public int getRegNo() {
+		return regNo;
+	}
 
-    public BookVO(int regNo, String title, String writer, String publisher, int issueYear, String status) {
-        super();
-        this.regNo = regNo;
-        this.title = title;
-        this.writer = writer;
-        this.publisher = publisher;
-        this.issueYear = issueYear;
-        this.status = status;
-    }
+	public void setRegNo(int regNo) {
+		this.regNo = regNo;
+	}
 
-    public int getRegNo() {
-        return regNo;
-    }
+	public String getIsbn() {
+		return isbn;
+	}
 
-    public void setRegNo(int regNo) {
-        this.regNo = regNo;
-    }
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public String getWriter() {
-        return writer;
-    }
+	public String getAuthor() {
+		return author;
+	}
 
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 
-    public String getPublisher() {
-        return publisher;
-    }
+	public String getPublisher() {
+		return publisher;
+	}
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
 
-    public int getIssueYear() {
-        return issueYear;
-    }
+	public String getPubdate() {
+		return pubdate;
+	}
 
-    public void setIssueYear(int issueYear) {
-        this.issueYear = issueYear;
-    }
+	public void setPubdate(String pubdate) {
+		this.pubdate = pubdate;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    @Override
-    public String toString() {
-        return "BookVO [regNo=" + regNo + ", title=" + title + ", writer=" + writer + ", publisher=" + publisher
-                + ", issueYear=" + issueYear + ", status=" + status + "]";
-    }
+	public String getImage() {
+		return image;
+	}
 
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "BookVO [regNo=" + regNo + ", isbn=" + isbn + ", title=" + title + ", author=" + author + ", publisher="
+				+ publisher + ", pubdate=" + pubdate + ", description=" + description + ", image=" + image
+				+ ", regDate=" + regDate + ", status=" + status + "]";
+	}
+
+	
+	
 }
