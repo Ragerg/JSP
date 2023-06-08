@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="${ pageContext.request.contextPath }/image/favicon.png">
-<title>도서관리</title>
+<title>도서정보 삭제</title>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/layout.css">
 </head>
 <body>
@@ -13,9 +14,7 @@
   <%@ include file="/jsp/include/top.jsp" %>
 </header>
 <section>
-<a href="${ pageContext.request.contextPath }/insertBookPage.do">도서정보 등록</a>
-<%-- <a href="${ pageContext.request.contextPath }/insertBookPage.do">도서정보 수정</a> --%>
-<%-- <a href="${ pageContext.request.contextPath }/insertBookPage.do">도서정보 삭제</a> --%>
+
 </section>
 <footer>
 <%@ include file="/jsp/include/bottom.jsp" %>

@@ -13,8 +13,8 @@
   <%@ include file="/jsp/include/top.jsp" %>
 </header>
 <section>
-<a href="${ pageContext.request.contextPath }/bookManagementPage.do">도서관리</a>
-<%-- <a href="${ pageContext.request.contextPath }/memberManagementPage.do">회원관리</a> --%>
+<a href="${ pageContext.request.contextPath }/searchBookPage.do">도서관리</a><br>
+<a href="${ pageContext.request.contextPath }/memberManagementPage.do">회원관리</a>
 </section>
 <footer>
 <%@ include file="/jsp/include/bottom.jsp" %>

@@ -6,7 +6,9 @@ import java.util.Map;
 import controller.book.InputBookController;
 import controller.book.InsertBookController;
 import controller.book.InsertBookPageController;
-import controller.manager.BookManagementPageController;
+import controller.book.SearchBookController;
+import controller.book.SearchBookPageController;
+import controller.book.DeleteBookPageController;
 import controller.manager.ManagerPageController;
 import controller.user.IdCheckController;
 import controller.user.JoinController;
@@ -32,9 +34,11 @@ public class HandlerMapping {
 		mappings.put("/insertBookPage.do", new InsertBookPageController());
 		mappings.put("/inputBook.do", new InputBookController());
 		mappings.put("/insertBook.do", new InsertBookController());
+		mappings.put("/deleteBookPage.do", new DeleteBookPageController());
 		
 		mappings.put("/managerPage.do", new ManagerPageController());
-		mappings.put("/bookManagementPage.do", new BookManagementPageController());
+		mappings.put("/searchBookPage.do", new SearchBookPageController());
+		mappings.put("/searchBook.do", new SearchBookController());
 	}
 	
 	public Controller getController(String path) {

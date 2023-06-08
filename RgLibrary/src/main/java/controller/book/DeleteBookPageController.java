@@ -1,16 +1,16 @@
-package controller.manager;
+package controller.book;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 
-public class BookManagementPageController implements Controller {
+public class DeleteBookPageController implements Controller {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		
-		return "/jsp/manager/BookManagementPage.jsp";
+		return "/jsp/book/deleteBookPage.jsp";
 	}
 
 }
