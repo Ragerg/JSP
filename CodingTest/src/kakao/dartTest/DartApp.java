@@ -3,7 +3,7 @@ package kakao.dartTest;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class dartApp {
+public class DartApp {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("다트 결과 : ");
