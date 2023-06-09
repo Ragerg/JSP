@@ -128,7 +128,7 @@
                     <c:if test="${ book.count - book.rentAble == book.count }">
                       <div class="unable">대여불가</div>
                     </c:if>
-                    <c:if test="${book.count - book.rentAble < book.count }">
+                    <c:if test="${ book.count - book.rentAble < book.count }">
                       <div class="able">대여가능</div>
                     </c:if>
                     ${ book.rentAble } / ${ book.count }
@@ -136,9 +136,9 @@
                       <a href="${ pageContext.request.contextPath }/deleteBookPage.do?isbn=${ book.isbn }"
                         class="card-link">삭제</a>
                     </c:if>
-                    <c:if test="${ member.role == 'U'}">
+                    <c:if test="${ book.count - book.rentAble < book.count }">
                       <a href="${ pageContext.request.contextPath }/rentBook.do?isbn=${ book.isbn }"
-                        class="card-link">도서대여</a>
+                        class="card-link">대여</a>
                     </c:if>
                   </div>
                 </div>

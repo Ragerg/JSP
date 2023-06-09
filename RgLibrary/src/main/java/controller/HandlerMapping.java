@@ -17,6 +17,7 @@ import controller.user.JoinPageController;
 import controller.user.LoginPageController;
 import controller.user.LoginProcessController;
 import controller.user.LogoutController;
+import controller.user.MyPageController;
 
 public class HandlerMapping {
 	private Map<String, Controller> mappings;
@@ -41,6 +42,8 @@ public class HandlerMapping {
 		mappings.put("/managerPage.do", new ManagerPageController());
 		mappings.put("/searchBookPage.do", new SearchBookPageController());
 		mappings.put("/searchBook.do", new SearchBookController());
+
+		mappings.put("/myPage.do", new MyPageController());
 	}
 	
 	public Controller getController(String path) {

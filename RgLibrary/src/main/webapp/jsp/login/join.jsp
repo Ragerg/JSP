@@ -67,7 +67,7 @@
 		        var response = xhr.responseText;
 		        console.log(response);
 		        let msgBox = id.nextElementSibling;
-		        if (response.trim() === "1") {
+		        if (response.trim() === "1" ) {
 		          // 아이디가 중복되지 않았을 경우
 		          id.classList.remove("is-invalid");
 		          id.classList.add("is-valid");

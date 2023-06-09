@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8">
     <link rel="icon" href="${ pageContext.request.contextPath }/image/favicon.png">
-    <title>관리자 페이지</title>
+    <title>마이페이지</title>
     <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/layout.css">
     <style>
       .container {
@@ -23,15 +23,13 @@
     <section>
       <div class="container justify-content-center">
         <div class="row">
-          도서관리<br>
-          <a href="${ pageContext.request.contextPath }/insertBookPage.do">도서등록</a> | 
-          <a href="${ pageContext.request.contextPath }/searchBookPage.do">도서삭제</a><br>
+          회원정보 <br>
+          <a href="${ pageContext.request.contextPath }/insertBookPage.do">회원정보 수정</a> | 
+          <a href="${ pageContext.request.contextPath }/searchBookPage.do">회원탈퇴</a>
           <hr>
-			회원관리<br>
-          <a href="${ pageContext.request.contextPath }/joinPage.do">회원조회</a> |
-          <a href="${ pageContext.request.contextPath }/joinPage.do">회원등록</a> | 
-          <a href="${ pageContext.request.contextPath }/joinPage.do">회원탈퇴</a> 
-          
+          대여도서<br>
+          <a href="${ pageContext.request.contextPath }/searchBookPage.do">도서대여</a> | 
+          <a href="${ pageContext.request.contextPath }/joinPage.do">반납하기</a><br>
         </div>
       </div>
     </section>
