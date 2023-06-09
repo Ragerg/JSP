@@ -37,7 +37,8 @@ nav ul li a {
 
 /* 섹션 스타일 */
 section {
-  padding: 100px;
+  padding-top: 10px;
+  padding-bottom: 100px;
 }
 
 section h2 {

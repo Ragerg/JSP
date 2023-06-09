@@ -24,18 +24,23 @@
 
       }
 
-      .searchForm {
-        display: flex;
-        white-space: nowrap;
-      }
+      /* 검색 폼 스타일 */
+        form.searchForm {
+          display: flex;
+          white-space: nowrap;
+          width: 1050px;
+        }
 
-      input[type="text"],
-      option {
-        padding: 8px;
-        width: 650px;
-        margin-right: 5px;
-        margin-left: 5px;
-      }
+        .search.input[type="text"],
+        option {
+          padding: 8px;
+          margin-right: 10px;
+          margin-left: 5px;
+        }
+
+        section#search {
+          padding: 10px;
+        }
 
       /* bookList */
       #bookCards {
@@ -103,12 +108,6 @@
               </select>
               <input type="text" class="form-control" placeholder="찾으시는 검색어를 입력하세요." name="searchText">
               <button type="submit" class="btn btn-primary">검색</button>
-              <c:if test="${ member.role == 'M'}">
-                <a href="${ pageContext.request.contextPath }/insertBookPage.do">
-                  <button type="button" class="btn btn-primary" id="insertBook" style="margin-left: auto;">도서정보
-                    등록</button>
-                </a><br>
-              </c:if>
             </form>
           </div>
 
@@ -122,7 +121,7 @@
                 <div class="col-12 card mb-3">
                   <div class="card-body">
                     <img src="${ book.image }" class="card-img-left" alt="...">
-                    <h5 class="card-title">${ book.title }</h5>
+                    <h5 class="card-title text-truncate">${ book.title }</h5>
                     <h6 class="card-subtitle mb-2 text-muted">${ book.author } / ${ book.pubdate } / ${ book.publisher }
                     </h6>
                     <p class="card-text text-truncate">${ book.description }</p>
@@ -134,8 +133,12 @@
                     </c:if>
                     ${ book.rentAble } / ${ book.count }
                     <c:if test="${ member.role == 'M'}">
-                      <a href="${ pageContext.request.contextPath }/deleteBookPage.do?isbn=${book.isbn}"
+                      <a href="${ pageContext.request.contextPath }/deleteBookPage.do?isbn=${ book.isbn }"
                         class="card-link">삭제</a>
+                    </c:if>
+                    <c:if test="${ member.role == 'U'}">
+                      <a href="${ pageContext.request.contextPath }/rentBook.do?isbn=${ book.isbn }"
+                        class="card-link">도서대여</a>
                     </c:if>
                   </div>
                 </div>

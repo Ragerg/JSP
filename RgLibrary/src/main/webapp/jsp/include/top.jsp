@@ -13,9 +13,9 @@
     <nav>
       <ul>
         <li><a href="${ pageContext.request.contextPath }/main.do">홈</a></li>
-        <li><a href="#about">소개</a></li>
-        <li><a href="#search">도서 검색</a></li>
-        <li><a href="#services">이용 안내</a></li>
+        <li><a href="${ pageContext.request.contextPath }/main.do#about">소개</a></li>
+        <li><a href="${ pageContext.request.contextPath }/main.do#services">이용 안내</a></li>
+        <li><a href="${ pageContext.request.contextPath }/searchBookPage.do">도서 검색</a></li>
         <c:choose>
           <%--로그인이 안되어있는 경우엔 로그인, 회원가입 버튼 --%>
             <c:when test="${ empty member }">

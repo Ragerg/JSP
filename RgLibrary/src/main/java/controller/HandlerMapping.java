@@ -8,6 +8,7 @@ import controller.book.InsertBookController;
 import controller.book.InsertBookPageController;
 import controller.book.SearchBookController;
 import controller.book.SearchBookPageController;
+import controller.book.DeleteBookController;
 import controller.book.DeleteBookPageController;
 import controller.manager.ManagerPageController;
 import controller.user.IdCheckController;
@@ -35,6 +36,7 @@ public class HandlerMapping {
 		mappings.put("/inputBook.do", new InputBookController());
 		mappings.put("/insertBook.do", new InsertBookController());
 		mappings.put("/deleteBookPage.do", new DeleteBookPageController());
+		mappings.put("/deleteBook.do", new DeleteBookController());
 		
 		mappings.put("/managerPage.do", new ManagerPageController());
 		mappings.put("/searchBookPage.do", new SearchBookPageController());

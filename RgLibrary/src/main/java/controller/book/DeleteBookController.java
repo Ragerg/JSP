@@ -1,16 +1,14 @@
 package controller.book;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import biz.book.BookDAO;
-import biz.book.BookVO;
 import controller.Controller;
 
-public class DeleteBookPageController implements Controller {
+public class DeleteBookController implements Controller {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
@@ -20,13 +18,11 @@ public class DeleteBookPageController implements Controller {
             e.printStackTrace();
         }
 
-        String isbn = request.getParameter("isbn");
+        int regNo = Integer.parseInt(request.getParameter("regNo"));
 
-        List<BookVO> list = new BookDAO().getBookISBN(isbn);
+        new BookDAO().deleteBook(regNo);
 
-        request.setAttribute("bookList", list);
-
-        return "/jsp/book/deleteBookPage.jsp";
+        return "/jsp/book/deleteBook.jsp";
 
     }
 }

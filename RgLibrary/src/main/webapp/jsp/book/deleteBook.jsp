@@ -7,8 +7,8 @@
 <%
 		String msg = "";
 		String locUrl = "";
-			msg = "아이디 또는 비밀번호가 잘못되었습니다. /n메인 페이지로 돌아갑니다.";
-			locUrl = "main.do";
+			msg = "도서가 삭제되었습니다. \n도서관리 페이지로 돌아갑니다.";
+			locUrl = "searchBookPage.do";
 		pageContext.setAttribute("msg", msg);
 		pageContext.setAttribute("url", locUrl);
 %>   

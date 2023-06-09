@@ -39,7 +39,7 @@ public class InsertBookController implements Controller {
 		BookDAO dao = new BookDAO();
 		dao.insertBook(vo);
 
-		return "main.do"; // 임시
+		return "jsp/book/insertBookPage.jsp";
 	}
 
 }
