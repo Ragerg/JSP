@@ -1,5 +1,17 @@
+<%@page import="biz.user.MemberVO"%>
+<%@page import="biz.rental.RentalDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <%@ page import="biz.rental.*" %>
+<%@ page import="java.util.List" %>
+<%
+RentalDAO dao = new RentalDAO();
+List<RentalVO> rentalList = null;
+MemberVO member = (MemberVO) session.getAttribute("member");
+if (member != null) {
+    rentalList = dao.getRentalList(member.getId());
+}
+%>
     <!DOCTYPE html>
     <html>
 
@@ -171,9 +183,30 @@
                       <section id="login">
                         <h3>[${ member.name }(${ member.id })님]</h3>
                         <%-- !!!대출 중인 도서목록, 반납하기 추가하기!!! --%>
-                          <div>
-
-                          </div>
+              <c:if test = "${ rentalList.size() == 0}">
+	        	<hr>
+	        	대여한 도서가 없습니다.
+	        	</c:if>
+							<table  class="table">
+	        	 <c:if test = "${ rentalList.size() != 0}">
+	        	<tr>
+	        	<th scope="col">제목</th>
+	        	<th scope="col">대여일</th>
+	        	<th scope="col">반납일</th>
+	        	</tr>
+              <c:forEach var="rental" items="${ rentalList }">
+	        	<tr>
+	        	<td>${rental.title }</td>
+	        	<td>${rental.rentalDate }</td>
+	        	<td>${rental.returnDate }</td>
+	        	<td><a href="${ pageContext.request.contextPath }/returnRental.do?regNo=${ rental.regNo }"
+                        class="card-link">반납하기</a></td>
+	        	<td> <a href="${ pageContext.request.contextPath }/renewal.do?rentNo=${ rental.rentNo }" 
+                        class="card-link">연장하기</a></td>
+	        	</tr>
+              </c:forEach>							
+							</table>
+							</c:if>
                           <%-- 마이페이지, 로그아웃 링크 --%>
                             <div>
                               <a href="${ pageContext.request.contextPath }/myPage.do">마이페이지</a> |

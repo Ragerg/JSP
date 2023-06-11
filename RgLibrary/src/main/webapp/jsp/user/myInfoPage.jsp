@@ -50,21 +50,21 @@
       function checkNewPasswordMatch() {
         var password = document.getElementById('newPw').value;
         var confirmPassword = document.getElementById('newPw2').value;
-        var messageElement = document.getElementById('newPassword-message');
+        var messageElement = document.getElementById('Password-message');
 
         if (password === confirmPassword) {
           messageElement.textContent = '';
-          pw.classList.remove('is-invalid');
+          document.getElementById('newPw').classList.remove('is-invalid');
         } else {
           messageElement.textContent = '비밀번호가 일치하지 않습니다.';
           messageElement.style.color = 'red';
-          newPw.classList.add("is-invalid");
+          document.getElementById('newPw').classList.add("is-invalid");
         }
       }
       
 		// 폼 입력 유효성 검사
 	    function validateForm() {
-	    	const requiredFields = ['id', 'pw', 'pw2','name', 'address', 'phone'];
+	    	const requiredFields = ['id','name', 'address', 'phone'];
 	    	let isValid = true;
 
 	    	  for (var i = 0; i < requiredFields.length; i++) {
@@ -116,7 +116,7 @@
                   <label for="pw">새 비밀번호 확인</label>
                   <input type="password" class="form-control" id="newPw2" name="newPw2" placeholder="" value="" required
                     oninput="checkNewPasswordMatch()">
-                  <span id="newPassword-message"></span><br>
+                  <span id="Password-message"></span><br>
                 </div>
               </div>
 
