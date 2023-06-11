@@ -44,7 +44,7 @@ public class MemberDAO {
 			stmt.setString(1, id);
 			rs = stmt.executeQuery();
 
-			if(rs.next()) {
+			if (rs.next()) {
 				// 중복 아이디
 				return 0;
 			} else {
@@ -56,8 +56,8 @@ public class MemberDAO {
 		} finally {
 			JDBCUtil.close(rs, stmt, conn);
 		}
-		//데이터베이스 오류
-		return -1; 
+		// 데이터베이스 오류
+		return -1;
 	}
 
 	// 로그인
@@ -88,32 +88,79 @@ public class MemberDAO {
 		}
 		return member;
 	}
-}
 
-// 마이페이지
-//    public MemberVO MemberPage(String id) {
-//
-//        StringBuilder sql = new StringBuilder();
-//        sql.append("select * from t_member where id = ? ");
-//
-//        MemberVO member = new MemberVO();
-//
-//        try (Connection conn = new ConnectionFactory().getConnection();
-//                PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-//            pstmt.setString(1, id);
-//
-//            ResultSet rs = pstmt.executeQuery();
-//            if (rs.next()) {
-//                member.setName(rs.getString("name"));
-//                member.setAddress(rs.getString("address"));
-//                member.setPhoneNum(rs.getString("phone_num"));
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return member;
-//    }
-//
-//}
+//회원정보수정
+	public int updateUser(String id, String password, String phone) {
+		String sql = "UPDATE T_MEMBER SET PW = ?, PHONE = ? WHERE ID = ?";
+
+		int result = 0;
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(sql.toString());
+			stmt.setString(1, password);
+			stmt.setString(2, phone);
+			stmt.setString(3, id);
+
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				result = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+
+		return result;
+	}
+
+// 관리자로 임명
+	public int updateGrade(String id) {
+		String sql = "UPDATE T_MEMBER SET ROLE = 'M' WHERE ID = ?";
+
+		int result = 0;
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(sql.toString());
+			stmt.setString(1, id);
+
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				result = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+
+		return result;
+	}
+
+// 회원탈퇴
+	public int deleteMember(String id) {
+		String sql = "DELETE FROM T_MEMBER WHERE ID = ?";
+
+		int result = 0;
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(sql.toString());
+			stmt.setString(1, id);
+
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				result = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+
+		return result;
+	}
+
+}

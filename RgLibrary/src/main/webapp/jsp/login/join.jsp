@@ -49,9 +49,11 @@
 
         if (password === confirmPassword) {
           messageElement.textContent = '';
+          pw.classList.remove('is-invalid');
         } else {
           messageElement.textContent = '비밀번호가 일치하지 않습니다.';
           messageElement.style.color = 'red';
+          pw.classList.add("is-invalid");
         }
       }
       

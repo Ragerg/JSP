@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <!DOCTYPE html>
   <html>
 
@@ -137,7 +138,7 @@
                         class="card-link">삭제</a>
                     </c:if>
                     <c:if test="${ book.count - book.rentAble < book.count }">
-                      <a href="${ pageContext.request.contextPath }/rentBook.do?isbn=${ book.isbn }"
+                      <a href="${ pageContext.request.contextPath }/rentalBook.do?isbn=${ book.isbn }"
                         class="card-link">대여</a>
                     </c:if>
                   </div>
