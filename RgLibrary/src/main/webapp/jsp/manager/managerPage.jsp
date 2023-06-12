@@ -28,9 +28,9 @@
           <a href="${ pageContext.request.contextPath }/searchBookPage.do">도서삭제</a><br>
           <hr>
 			회원관리<br>
-          <a href="${ pageContext.request.contextPath }/joinPage.do">회원조회</a> |
+<%--           <a href="${ pageContext.request.contextPath }/joinPage.do">회원조회</a> | --%>
           <a href="${ pageContext.request.contextPath }/joinPage.do">회원등록</a> | 
-          <a href="${ pageContext.request.contextPath }/joinPage.do">회원탈퇴</a> 
+<%--           <a href="${ pageContext.request.contextPath }/joinPage.do">회원탈퇴</a>  --%>
           
         </div>
       </div>

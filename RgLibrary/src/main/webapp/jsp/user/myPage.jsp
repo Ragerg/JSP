@@ -82,7 +82,7 @@
         <div class="row">
           <div>
             <a href="${ pageContext.request.contextPath }/pwCheckPage.do">회원정보 수정</a> | 
-          <a href="${ pageContext.request.contextPath }/searchBookPage.do">회원탈퇴</a>
+          <a href="${ pageContext.request.contextPath }/pwCheckPage.do">회원탈퇴</a>
           </div>
 
           <div>

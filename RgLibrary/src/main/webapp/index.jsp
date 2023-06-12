@@ -11,6 +11,7 @@ MemberVO member = (MemberVO) session.getAttribute("member");
 if (member != null) {
     rentalList = dao.getRentalList(member.getId());
 }
+request.setAttribute("rentalList", rentalList);
 %>
     <!DOCTYPE html>
     <html>
@@ -113,6 +114,10 @@ if (member != null) {
         #services {
          width: 550px;
         }
+        
+        td, th {
+        width: 200px;
+        }
       </style>
     </head>
 
@@ -191,18 +196,12 @@ if (member != null) {
 	        	 <c:if test = "${ rentalList.size() != 0}">
 	        	<tr>
 	        	<th scope="col">제목</th>
-	        	<th scope="col">대여일</th>
 	        	<th scope="col">반납일</th>
 	        	</tr>
               <c:forEach var="rental" items="${ rentalList }">
 	        	<tr>
-	        	<td>${rental.title }</td>
-	        	<td>${rental.rentalDate }</td>
-	        	<td>${rental.returnDate }</td>
-	        	<td><a href="${ pageContext.request.contextPath }/returnRental.do?regNo=${ rental.regNo }"
-                        class="card-link">반납하기</a></td>
-	        	<td> <a href="${ pageContext.request.contextPath }/renewal.do?rentNo=${ rental.rentNo }" 
-                        class="card-link">연장하기</a></td>
+	        	<td class="d-inline-block text-truncate">${ rental.title }</td>
+	        	<td class="text-truncate">${ rental.returnDate }</td>
 	        	</tr>
               </c:forEach>							
 							</table>
