@@ -79,14 +79,14 @@
                     <h6 class="card-subtitle mb-2 text-muted">${ book.author } / ${ book.pubdate } / ${ book.publisher }
                     </h6>
                     <p class="card-text text-truncate">${ book.description }</p>
-                    <c:if test="${ book.count - book.rentAble == book.count }">
-                      <div class="unable">대여불가</div>
+                    <c:if test="${ book.status == 0 }">
+                      <div class="unable">대여중</div>
                     </c:if>
-                    <c:if test="${book.count - book.rentAble < book.count }">
-                      <div class="able">대여가능</div>
+                    <c:if test="${ book.status == 1 }">
+                      <div class="able">삭제가능</div>
                     </c:if>
                     도서번호 : ${ book. regNo }
-                    <c:if test="${ member.role == 'M'}">
+                    <c:if test="${ member.role == 'M' && book.status == 1 }">
                       <a href="${ pageContext.request.contextPath }/deleteBook.do?regNo=${ book.regNo }"
                         class="card-link">삭제</a>
                     </c:if>

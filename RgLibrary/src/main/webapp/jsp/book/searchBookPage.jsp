@@ -133,11 +133,11 @@
                       <div class="able">대여가능</div>
                     </c:if>
                     ${ book.rentAble } / ${ book.count }
-                    <c:if test="${ member.role == 'M'}">
+                    <c:if test="${ member.role == 'M' && book.count - book.rentAble < book.count }">
                       <a href="${ pageContext.request.contextPath }/deleteBookPage.do?isbn=${ book.isbn }"
                         class="card-link">삭제</a>
                     </c:if>
-                    <c:if test="${ book.count - book.rentAble < book.count }">
+                    <c:if test="${ member.role == 'U' && book.count - book.rentAble < book.count }">
                       <a href="${ pageContext.request.contextPath }/rentalBook.do?isbn=${ book.isbn }"
                         class="card-link">대여</a>
                     </c:if>
