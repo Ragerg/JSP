@@ -32,8 +32,8 @@ public class InputBookController implements Controller {
 			e.printStackTrace();
 		}
 
-	        String clientId = "32rT0zbBBurxEZCL18h7"; //애플리케이션 클라이언트 아이디
-	        String clientSecret = "hetqKbkPFy"; //애플리케이션 클라이언트 시크릿
+	        String clientId = ""; //애플리케이션 클라이언트 아이디
+	        String clientSecret = ""; //애플리케이션 클라이언트 시크릿
 
 
 	        String text = null;

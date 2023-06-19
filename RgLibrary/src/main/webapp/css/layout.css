@@ -9,14 +9,13 @@ body {
 
 /* 헤더 스타일 */
 header {
-  background-color: black;
+  background-color: white;
   padding: 20px;
-  text-align: center;
 }
 
 header img {
   margin: 0;
-  width: 30%;
+  width: 10;
 }
 
 nav ul {
