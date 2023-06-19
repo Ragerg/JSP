@@ -10,6 +10,7 @@ import controller.book.SearchBookController;
 import controller.book.SearchBookPageController;
 import controller.book.DeleteBookController;
 import controller.book.DeleteBookPageController;
+import controller.manager.AllMemberListController;
 import controller.manager.ManagerPageController;
 import controller.rental.RenewalController;
 import controller.rental.RentalBookController;
@@ -50,6 +51,7 @@ public class HandlerMapping {
 		mappings.put("/managerPage.do", new ManagerPageController());
 		mappings.put("/searchBookPage.do", new SearchBookPageController());
 		mappings.put("/searchBook.do", new SearchBookController());
+		mappings.put("/allMemberList.do", new AllMemberListController());
 		
 		mappings.put("/myPage.do", new MyPageController());
 		mappings.put("/pwCheckPage.do", new PwCheckPageController());

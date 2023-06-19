@@ -3,6 +3,8 @@ package biz.user;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import biz.common.JDBCUtil;
 
@@ -115,29 +117,36 @@ public class MemberDAO {
 		return result;
 	}
 
-// 관리자로 임명
-	public int updateGrade(String id) {
-		String sql = "UPDATE T_MEMBER SET ROLE = 'M' WHERE ID = ?";
+	// 회원 정보 불러오기
+    public List<MemberVO> allMemberList() {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT T_MEMBER.ID, NAME, PHONE, ROLE, TO_CHAR(MIN(RETURN_DATE),'YYYY-MM-DD')");
+        sql.append("  FROM T_MEMBER LEFT OUTER JOIN T_RENTAL ON T_MEMBER.ID = T_RENTAL.ID");
+        sql.append(" GROUP BY T_MEMBER.ID, NAME, PHONE, ROLE");
 
-		int result = 0;
-		try {
-			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(sql.toString());
-			stmt.setString(1, id);
+        List<MemberVO> memberList = new ArrayList<>();
+        try {
+            conn = JDBCUtil.getConnection();
+            stmt = conn.prepareStatement(sql.toString());
 
-			rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
-			if (rs.next()) {
-				result = 1;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			JDBCUtil.close(rs, stmt, conn);
-		}
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String name = rs.getString(2);
+                String phone = rs.getString(3);
+                String role = rs.getString(4);
+                String return_date = rs.getString(5);
+                memberList.add(new MemberVO(id, null, name, phone, role, return_date));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.close(rs, stmt, conn);
+        }
 
-		return result;
-	}
+        return memberList;
+    }
 
 // 회원탈퇴
 	public int deleteMember(String id) {
