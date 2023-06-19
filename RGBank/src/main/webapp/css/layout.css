@@ -4,14 +4,16 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
+  padding: 0px 150px;
 }
 
 /* 헤더 스타일 */
 header {
   background-color: white;
-  padding: 20px;
-  position: relative;
+  padding: 30px 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header img {
@@ -20,9 +22,8 @@ header img {
 }
 
 header nav {
-  position: absolute;
-  bottom: 2em;
-  right: 1em;
+  display: flex;
+  justify-content: flex-end;
 }
 
 nav ul {
@@ -41,14 +42,44 @@ nav ul li a {
   color: rgb(0, 112, 192);
 }
 
+/* 미디어 쿼리 추가 */
+@media only screen and (max-width: 820px) {
+  header {
+    background-color: white;
+    padding: 30px 20px 10px;
+    flex-direction: column; /* flex 방향을 세로(column)로 변경 */
+    align-items: center; /* 가운데 정렬 */
+  }
+
+  header img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  header nav {
+    margin-top: 1em;
+    text-align: center; /* 가운데 정렬 */
+  }
+
+  nav ul li {
+    display: block; /* inline-block 대신 block으로 변경 */
+    margin: 10px 0; /* 마진 조정 */
+  }
+}
+
 /* 섹션 스타일 */
 section {
-  padding-top: 10px;
   padding-bottom: 100px;
+  background-color: white;
 }
 
 section h2 {
   margin-top: 0;
+}
+
+.half {
+  background-color: rgb(0, 112, 192);
+  height: 20em;
 }
 
 /* 푸터 스타일 */

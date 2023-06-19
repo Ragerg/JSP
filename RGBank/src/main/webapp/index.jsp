@@ -15,7 +15,9 @@
     </header>
 
     <section>
+      <div class="half">
 
+      </div>
     </section>
 
     <footer>
