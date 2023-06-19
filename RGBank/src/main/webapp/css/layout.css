@@ -18,9 +18,14 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
+
 /* 헤더 스타일 */
 header {
   background-color: white;
+  border-bottom: 1px solid #c8c8c8;
 }
 
 header .inner {
@@ -36,7 +41,6 @@ header .logo {
   bottom: 0;
   left: 0;
   margin: auto;
-  display: none;
 }
 
 header img {
@@ -45,15 +49,14 @@ header img {
 }
 
 header .sub-menu {
+  position: absolute;
+  top: 10px;
+  right: 0;
   display: flex;
 }
 
 header .sub-menu ul.login {
   display: flex;
-}
-
-header .sub-menu ul.login li {
-  list-style: none;
 }
 
 header .sub-menu ul.login li a {
@@ -98,6 +101,32 @@ header .sub-menu .search .material-icons {
   bottom: 0;
   right: 5px;
   margin: auto;
+  transition: 0.4s;
+}
+
+header .sub-menu .search.focused .material-icons {
+  opacity: 0;
+}
+
+header .main-menu {
+  display: flex;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+}
+
+header .main-menu .item {
+  padding: 10px 20px 34px 20px;
+  font-size: 13px;
+  color: rgb(0, 112, 192);
+}
+
+header .main-menu .item:hover {
+  background-color: rgb(0, 112, 192);
+  color: white;
+  border-radius: 6px;
 }
 
 /* 섹션 스타일 */
