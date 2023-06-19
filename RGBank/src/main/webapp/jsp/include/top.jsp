@@ -1,15 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <style>
+    <head>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+      <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/layout.css">
+      <script defer src="./js/main.js"></script>
+    </head>
 
-    </style>
-    <!-- 로고-->
-    <a href="${ pageContext.request.contextPath }/main.do"><img
-        src="${ pageContext.request.contextPath }/image/logo.png" /></a>
-    <!-- 메뉴 바 -->
-    <nav>
-      <ul>
+    <div class="inner">
+      <!-- 로고-->
+      <a href="${ pageContext.request.contextPath }/main.do" class="logo">
+        <img src="${ pageContext.request.contextPath }/image/logo.png" alt="BANK" />
+      </a>
+
+      <!-- 메뉴 바 -->
+      <div class="sub-menu">
+        <ul class="login">
+          <c:choose>
+            <%--로그인이 안되어있는 경우엔 로그인, 회원가입 버튼 --%>
+              <c:when test="${ empty member }">
+                <li><a href="javascript:void(0)">로그인</a></li>
+                <li><a href="javascript:void(0)">회원가입</a></li>
+              </c:when>
+              <%--로그인이 되어있는 경우--%>
+                <c:otherwise>
+                  <li><a href="javascript:void(0)">로그아웃</a></li>
+                </c:otherwise>
+          </c:choose>
+        </ul>
+        <div class="search">
+          <input type="text" />
+          <div class="material-icons">search</div>
+        </div>
+      </div>
+      <!-- <ul>
         <c:choose>
           <%--로그인이 안되어있는 경우엔 로그인, 회원가입 버튼 --%>
             <c:when test="${ empty member }">
@@ -36,5 +60,5 @@
                     <li><a href="${ pageContext.request.contextPath }/logout.do">로그아웃</a></li>
                   </c:otherwise>
         </c:choose>
-      </ul>
-    </nav>
+      </ul> -->
+    </div>
