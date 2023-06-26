@@ -50,104 +50,102 @@ header img {
 
 header .sub-menu {
   position: absolute;
-  top: 10px;
+  bottom: 10px;
   right: 0;
   display: flex;
 }
 
-header .sub-menu ul.login {
+header .sub-menu ul.menu {
   display: flex;
 }
 
-header .sub-menu ul.login li a {
+header .sub-menu ul.menu li a {
   font-size: 12px;
   padding: 11px 16px;
   display: block;
   color: rgb(0, 112, 192);
 }
 
-header .sub-menu ul.login li a:hover {
+header .sub-menu ul.menu li a:hover {
   color: rgb(0, 10, 20);
-}
-
-header .sub-menu .search {
-  height: 34px;
-  position: relative;
-}
-
-header .sub-menu .search input {
-  width: 36px;
-  height: 34px;
-  padding: 4px 10px;
-  border: 1px solid rgb(150, 170, 190);
-  box-sizing: border-box;
-  border-radius: 5px;
-  outline: none;
-  background-color: #fff;
-  color: rgb(0, 112, 192);
-  font-size: 12px;
-  transition: width 0.4s;
-}
-
-header .sub-menu .search input:focus {
-  width: 190px;
-  border-color: rgb(0, 112, 192);
-}
-
-header .sub-menu .search .material-icons {
-  height: 24px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 5px;
-  margin: auto;
-  transition: 0.4s;
-}
-
-header .sub-menu .search.focused .material-icons {
-  opacity: 0;
-}
-
-header .main-menu {
-  display: flex;
-
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 1;
-}
-
-header .main-menu .item {
-  padding: 10px 20px 34px 20px;
-  font-size: 13px;
-  color: rgb(0, 112, 192);
-}
-
-header .main-menu .item:hover {
-  background-color: rgb(0, 112, 192);
-  color: white;
-  border-radius: 6px;
 }
 
 /* 섹션 스타일 */
 section {
-  padding-bottom: 100px;
   background-color: white;
-}
-
-section h2 {
-  margin-top: 0;
+  padding-bottom: 60px;
 }
 
 .half {
+  padding: 0;
   background-color: rgb(0, 112, 192);
   height: 20em;
 }
+
+      /* 폼 스타일 */
+      #login  form {
+        margin-bottom: 20px;
+      }
+
+      #login  input[type="text"],
+      #login  input[type="password"] {
+        padding: 8px;
+        width: 300px;
+      }
+
+      /* 로그인 폼 스타일 */
+      #login {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 30px;
+      }
+
+      #login  button[type="submit"] {
+        padding: 8px 20px;
+        background-color: rgb(0, 112, 192);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      #login  #loginBtn {
+        width: 300px;
+        margin-bottom: 10px;
+      }
+
+      #login a {
+        margin-left: 0.4em;
+      }
+
+      #login a.hover {
+        color: #FFD966;
+      }
+
+.container {
+    max-width: 400px;
+}
+
+.btn-primary {
+    background-color: rgb(0, 112, 192);
+    border-color: rgb(0, 112, 192);
+}
+
+.btn-primary:hover {
+    background-color: rgb(0, 80, 160);
+    border-color: rgb(0, 80, 160);
+}
+
 
 /* 푸터 스타일 */
 footer {
   background-color: rgb(0, 112, 192);
   color: #fff;
-  padding: 20px;
   text-align: center;
+  border-top: 1px solid #c8c8c8;
+}
+
+footer .inner {
+  padding: 40px 0 60px 0;
 }

@@ -1,16 +1,18 @@
-const searchEl = document.querySelector(".search");
-const searchInputEl = searchEl.querySelector("input");
+//로그인
+function checkForm(e) {
+  let f = document.loginForm;
 
-searchEl.addEventListener("click", function () {
-  searchInputEl.focus();
-});
+  if (f.id.value === "") {
+    alert("ID를 입력하세요");
+    id.focus();
+    return false;
+  }
 
-searchInputEl.addEventListener("focus", function () {
-  searchEl.classList.add("focused");
-  searchInputEl.setAttribute("placeholder", "통합검색");
-});
+  if (f.password.value === "") {
+    alert("비밀번호를 입력하세요");
+    password.focus();
+    return false;
+  }
 
-searchInputEl.addEventListener("blur", function () {
-  searchEl.classList.remove("focused");
-  searchInputEl.setAttribute("placeholder", " ");
-});
+  return true;
+}
