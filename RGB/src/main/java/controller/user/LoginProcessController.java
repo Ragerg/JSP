@@ -45,11 +45,11 @@ public class LoginProcessController implements Controller {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            return "main.do";
+            return "index.do";
         } else {
             request.setAttribute("msg", "아이디 또는 비밀번호가 맞지 않습니다.");
             request.setAttribute("url", "loginPage.do");
-            return "/jsp/etc/alert.jsp";
+            return "/jsp/alert_warning.jsp";
         }
 
     }

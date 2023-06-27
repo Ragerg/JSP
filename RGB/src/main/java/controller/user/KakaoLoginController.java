@@ -14,7 +14,6 @@ public class KakaoLoginController implements Controller {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-
         try {
             request.setCharacterEncoding("utf-8");
         } catch (UnsupportedEncodingException e) {
@@ -34,10 +33,12 @@ public class KakaoLoginController implements Controller {
             user = dao.getUser(user);
             session.setAttribute("user", user);
         }
+        
+        System.out.println(result);
 
         request.setAttribute("result", result);
 
-        return "/jsp/etc/ajax.jsp";
+        return "/jsp/check.jsp";
 
     }
 }

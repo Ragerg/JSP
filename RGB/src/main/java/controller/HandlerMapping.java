@@ -21,14 +21,11 @@ public class HandlerMapping {
 			InputStream is = new FileInputStream(propLoc);
 			prop.load(is);
 			Set<Object> keys = prop.keySet();
-			System.out.println(keys);
 			for(Object key : keys) {
 				String className = prop.getProperty(key.toString());
-				System.out.println(className);
 				Class<?> clz = Class.forName(className);
 				Constructor<?> consturctor =  clz.getConstructor();
 				consturctor.newInstance();
-				System.out.println(key);
 				mappings.put(key.toString(), (Controller)consturctor.newInstance());
 			}
 			
@@ -38,6 +35,8 @@ public class HandlerMapping {
 	}
 	
 	public Controller getController(String uri) {
+		System.out.println(uri);
+		System.out.println(mappings.get(uri));
 		
 		return mappings.get(uri);
 		

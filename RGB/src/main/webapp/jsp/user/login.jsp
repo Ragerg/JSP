@@ -20,7 +20,7 @@
         <div class="form-floating">
           <label for="floatingInput">ID</label>
           <input type="text" class="form-control" id="floatingInput" name="id" value="${cookie.id.value }"
-            placeholder="name@example.com">
+            placeholder="ID">
           </div>
           <br>
             <label for="floatingPassword">비밀번호</label>

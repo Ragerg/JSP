@@ -16,6 +16,6 @@ public class LogoutController implements Controller {
 
         request.setAttribute("msg", "로그아웃 되었습니다.");
         request.setAttribute("url", "loginPage.do");
-        return "/jsp/etc/alert.jsp";
+        return "/jsp/alert_success.jsp";
     }
 }

@@ -23,7 +23,7 @@ public class IdCheckController implements Controller {
         int result = new UserDAO().checkId(id, "W");
         request.setAttribute("result", result);
 
-        return "/jsp/etc/ajax.jsp";
+        return "/jsp/check.jsp";
 
     }
 }

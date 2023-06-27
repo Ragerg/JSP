@@ -3,6 +3,7 @@
  
 <!DOCTYPE html>
 <html>
+
 <meta charset="UTF-8">
 	<title>RGBank</title>
 
@@ -33,7 +34,7 @@
 
 								var map = new kakao.maps.Map(container, options);
 							</script>
-							<br>한국폴리텍대학 성남캠퍼스 드림관<br>
+							<p><br>한국폴리텍대학 성남캠퍼스 드림관<br>
 							도로명 주소 : 경기 성남시 수정구 수정로 398(산성동)<br>
 							교통편 : <br>
 							 - 지하철 8호선 산성역 도보 10분<br>

@@ -8,7 +8,7 @@
 <body>
 <%@ include file="/jsp/include/header.jsp" %>
 
-    <c:if test="${ not empty user}">
+    <c:if test="${ empty user}">
       <script>alert("로그인 후 이용해 주세요."); location.href = "index.do";</script>
     </c:if>
     <section class="section">
@@ -20,7 +20,7 @@
           <div class="form-group">
             <div class="mb-3">
               <label for="title">제목</label>
-              <input type="text" class="form-control " id="title" name="title" required="" value="Re: ${board.title }">
+              <input type="text" class="form-control " id="title" name="title" required="" value="Re: ${ board.title }">
               <input type="hidden" name="b_no" required="" value="${board.b_no }">
             </div>
 

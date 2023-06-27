@@ -38,13 +38,15 @@ public class InsertUserController implements Controller {
         String msg = "";
         if (result == 1) {
             msg = "회원가입이 완료되었습니다.";
+            request.setAttribute("msg", msg);
+            request.setAttribute("url", request.getContextPath() + "/loginPage.do");
+            return "/jsp/alert_success.jsp";
         } else {
             msg = "오류가 발생하였습니다. 잠시 후 다시 시도해주세요.";
+            request.setAttribute("msg", msg);
+            request.setAttribute("url", request.getContextPath() + "/loginPage.do");
         }
-
-        request.setAttribute("msg", msg);
-        request.setAttribute("url", request.getContextPath() + "/jsp/user/login.jsp");
-        return "/jsp/etc/alert.jsp";
+        return "/jsp/alert_warning.jsp";
 
     }
 }

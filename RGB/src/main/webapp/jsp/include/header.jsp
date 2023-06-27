@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +15,16 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 	<link href="assets/style.css" rel="stylesheet" media="screen" />
 	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+	
 	<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 	<script src="/RGB/assets/script.js" defer></script>
 	<script src="/RGB/assets/main.js" defer></script>
-	<script src="/RGB/assets/loginAPI.js" defer></script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>
@@ -46,10 +51,10 @@
 							<a class="nav-link text-dark" href="${ pageContext.request.contextPath }/getBoardList.do">게시판</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-dark" href="contact.html">상품</a>
+							<a class="nav-link text-dark" href="${ pageContext.request.contextPath }/poductList.do">상품</a>
 						</li>
 						<c:choose>
-							<c:when test="${ empty member }">
+							<c:when test="${ empty user }">
 								<li class="nav-item">
 									<a class="nav-link text-dark" href="${ pageContext.request.contextPath }/joinPage.do">회원가입</a>
 								</li>
@@ -58,18 +63,18 @@
 								</li>
 							</c:when>
 							<%--a매니저--%>
-								<c:when test="${ member.role == 'M' }">
+								<c:when test="${ user.role_cd == 'M1' }">
 									<li class="nav-item">
 										<a class="nav-link text-dark" href="javascript:void(0)">회원관리</a>
 									</li>
+<!-- 									<li class="nav-item"> -->
+<!-- 										<a class="nav-link text-dark" href="javascript:void(0)">문의관리</a> -->
+<!-- 									</li> -->
+<!-- 									<li class="nav-item"> -->
+<!-- 										<a class="nav-link text-dark" href="javascript:void(0)">상품관리</a> -->
+<!-- 									</li> -->
 									<li class="nav-item">
-										<a class="nav-link text-dark" href="javascript:void(0)">문의관리</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link text-dark" href="javascript:void(0)">상품관리</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link text-dark" href="javascript:void(0)">로그아웃</a>
+										<a class="nav-link text-dark" href="${ pageContext.request.contextPath }/logout.do" >로그아웃</a>
 									</li>
 								</c:when>
 								<%--일반 사용자--%>
@@ -84,7 +89,7 @@
 											<a class="nav-link text-dark" href="javascript:void(0)">마이페이지</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link text-dark" href="javascript:void(0)">로그아웃</a>
+											<a class="nav-link text-dark" href="${ pageContext.request.contextPath }/logout.do" >로그아웃</a>
 										</li>
 									</c:otherwise>
 						</c:choose>

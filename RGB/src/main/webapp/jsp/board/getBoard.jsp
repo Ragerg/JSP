@@ -12,24 +12,30 @@
     <div class="container">
     <div class="input-form col-md-12 mx-auto">
          <form class="validation-form" novalidate="" onsubmit="return submitForm()" action="${ pageContext.request.contextPath }/reBoard.do" method="post">
-            <input type="text" class="form-control form-control-plaintext " id="title" name="title" required="" value="${board.title }" readonly>
-            <input type="hidden" name="b_no" value="${board.b_no }" readonly>
+            <h3 class="my-3 text-primary">${ board.title }</h3>
+            <input type="hidden" name="b_no" value="${ board.b_no }" readonly>
+            <input type="hidden" name="title" value="${ board.title }" readonly>
             <div class="row">
-                <div class="mb-3 col-md-6">
-                    <input type="text" class="form-control form-control-plaintext " name="title" required="" value="작성자이름" readonly>
+                <div class="col-md-6">
+                    <input type="text" class="form-control form-control-plaintext " name="user_id" required="" value="${ board.user_id }" readonly>
                 </div>
-                <div class="mb-3 col-md-6">
-                    <input type="text" class="form-control form-control-plaintext " name="title" required="" value="${board.reg_date }" readonly>
+                <div class="col-md-6">
+                    <input type="text" class="form-control form-control-plaintext " name="reg_date" required="" value="${ board.reg_date }" readonly>
                 </div>
 
-                <div class="mb-5">
-                    <label for="content">문의내용</label>
-                    <textArea class="form-control form-control-plaintext " id="content" name="content" rows="10" readonly>${board.content }</textArea>
+                <div class="col-md-12">
+                <br>
+                    <textArea class="form-control form-control-plaintext " id="content" name="content" rows="10" readonly>${ board.content }</textArea>
                 </div>
             </div>
+            <c:choose>
+            <c:when test="${ user.role_cd == 'M1' }">
+            <br>
             <button class="btn btn-primary btn-lg btn-block" type="submit">답글</button>
-            <button class="btn btn-primary btn-lg btn-block" type="button">수정</button>
-            <button class="btn btn-primary btn-lg btn-block" type="button">삭제</button>                  
+            </c:when>
+            
+            </c:choose>
+            <a class="btn btn-secondary mt-3" href="${ pageContext.request.contextPath }/getBoardList.do">목록으로</a>                  
         </form>
     </div>
     </div>

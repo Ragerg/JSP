@@ -45,7 +45,7 @@
 
 
                 <div class="mb-3">
-                  <label for="address">이름</label>
+                  <label for="name">이름</label>
                   <input type="text" class="form-control" id="name" name="name" required="">
                   <div class="invalid-feedback">
                     이름을 입력해주세요.
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="mb-3">
-                  <label for="address">생년월일</label>
+                  <label for="birthday">생년월일</label>
                   <input type="date" class="form-control" id="birthday" name="birthday" required="">
                   <div class="invalid-feedback">
                     생일을 입력해주세요.
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="mb-3">
-                  <label for="code">핸드폰 번호</label>
+                  <label for="phone">핸드폰 번호</label>
                   <input type="tel" class="form-control" id="phone" name="phone" required=""
                     placeholder="010-1234-5678(하이픈(-)포함)" pattern="([0-9]{3})-([0-9]{3,4})-([0-9]{4})$">
                   <div class="invalid-feedback">

@@ -1,5 +1,7 @@
 package biz.board;
 
+import java.util.Date;
+
 public class BoardVO {
 
     private int level;
@@ -9,7 +11,7 @@ public class BoardVO {
     private String name;
     private String content;
     private int hits;
-    private String reg_date;
+    private Date reg_date;
     private int parent_id;
 
     public BoardVO() {
@@ -73,11 +75,11 @@ public class BoardVO {
         this.hits = hits;
     }
 
-    public String getReg_date() {
+    public Date getReg_date() {
         return reg_date;
     }
 
-    public void setReg_date(String reg_date) {
+    public void setReg_date(Date reg_date) {
         this.reg_date = reg_date;
     }
 
@@ -90,7 +92,7 @@ public class BoardVO {
     }
 
     public BoardVO(int level, int b_no, String title, String user_id, String name, String content, int hits,
-            String reg_date, int parent_id) {
+            Date reg_date, int parent_id) {
         super();
         this.level = level;
         this.b_no = b_no;

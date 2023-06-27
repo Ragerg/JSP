@@ -1,41 +1,4 @@
 window.onload = function () {
-  // mainmenu hover이벤트
-  let secondNavs = document.querySelectorAll(".second-nav li");
-  let subMenus = document.querySelectorAll(".sub-menu");
-  secondNavs.forEach(function (nav) {
-    nav.addEventListener("mouseover", function () {
-      subMenus.forEach(function (smenu) {
-        smenu.style.display = "block";
-        document.querySelector(".sub_bg").style.display = "block";
-      });
-    });
-    nav.addEventListener("mouseout", function () {
-      subMenus.forEach(function (smenu) {
-        smenu.style.display = "none";
-        document.querySelector(".sub_bg").style.display = "none";
-      });
-    });
-  });
-
-  // 모바일 버전 메뉴 이벤트
-  document.querySelector(".bi-x-lg").addEventListener("click", function () {
-    document.querySelector(".mobileMenu").style.display = "none";
-  });
-
-  document.querySelector(".bi-list").addEventListener("click", function () {
-    document.querySelector(".mobileMenu").style.display = "block";
-  });
-
-  // 신간도서, 인기도서 선택
-  let bannerNav = document.querySelectorAll(".booksBannerNav li");
-  bannerNav.forEach(function (b_li) {
-    b_li.addEventListener("click", function () {
-      document
-        .querySelector(".booksBannerNav .active")
-        .classList.remove("active");
-      this.classList.add("active");
-    });
-  });
 
   // 비밀번호 확인체크
   let checkPassword = document.getElementById("checkPassword");
@@ -53,9 +16,9 @@ window.onload = function () {
 
 // 아이디 중복체크
 function checkId() {
-  var id = document.getElementById("id");
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/JHBank/idCheck.do");
+  let id = document.getElementById("id");
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "/RGB/idCheck.do");
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
@@ -174,4 +137,27 @@ function daumPostcode() {
       }
     },
   }).open();
+  
+  // 3자리마다 ,
+  function addCommas(input) {
+  // 입력된 값을 가져옵니다.
+  let value = input.value;
+
+  // 쉼표를 제거한 숫자 문자열을 생성합니다.
+  let numberString = value.replace(/,/g, '');
+
+  // 세 자리마다 쉼표를 추가합니다.
+  let numberWithCommas = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  // 쉼표가 추가된 값을 입력 필드에 할당합니다.
+  input.value = numberWithCommas;
+}
+  
+  
+  
+  
+  
+  
+  
+  
 }

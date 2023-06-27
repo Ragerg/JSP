@@ -88,29 +88,76 @@ CREATE TABLE BANK_USER (
 	"ADDRESS"	varchar2(2048),
 	"DETAIL_ADDRESS"	varchar2(255)
 );
-drop table BANK_USER;
+
+select * from BANK_USER;
+update BANK_USER set role_cd = 'M1' where user_id='admin01';
+
+SELECT * FROM PRODUCT WHERE STATUS_CD = 1;
 
 CREATE TABLE BANK_USER_ROLE (
-	"ROLE_CO"	CHAR(2)		NOT NULL,
+	"ROLE_CD"	CHAR(2)		NOT NULL,
 	"ROLE_NM"	varchar2(255)		NULL
 );
 
-INSERT INTO BANK_USER_ROLE VALUES('M1', '관리자');
+INSERT INTO status VALUES('9', '탈퇴');
+INSERT INTO product(product_cd, product_name, interest_rate) VALUES('A', '일반 입출금통장', 3.2);
 
-SELECT * FROM BANK_USER_ROLE;
+rollback;
+
+SELECT * FROM account;
 COMMIT;
 
 ALTER TABLE BANK_USER_ROLE ADD CONSTRAINT "PK_ROLE" PRIMARY KEY (
-	"ROLE_CO"
+	"ROLE_CD"
 );
 
 ALTER TABLE BANK_USER ADD CONSTRAINT FK_BANK_USER_TO_BANK_USER_ROLE FOREIGN KEY (
 	ROLE_CD
 ) REFERENCES BANK_USER_ROLE(ROLE_CD);
 
-select * from bank_user;
+select * from status;
 
 SELECT * FROM BANK_USER WHERE USER_ID = 'j.hyun123@kakao.comK' AND SIGNUP_TYPE = 'K';
 
-delete from bank_user where user_id = 'j.hyun123@kakao.comK';
+delete from account;
+
+
+commit;
+
+
+CREATE TABLE ACCOUNT (
+	"account_number"	varchar2(100)		PRIMARY KEY,
+	"user_id"	       varchar2(20)		NULL,
+	"bank_cd"	       varchar2(1)		NULL,
+	"product_cd"	       varchar2(1)		NULL,
+	"account_password"	number(4)		NULL,
+	"reg_date"	       date		       NULL,
+	"balance"	       number(30)		NULL
+);
+
+CREATE TABLE status (
+	"status_cd"	       varchar2(1)		PRIMARY KEY,
+	"status_name"   	varchar2(20)		NULL
+);
+
+CREATE TABLE PRODUCT (
+	"product_cd"  	varchar2(1)		PRIMARY KEY,
+	"product_name"	varchar2(1)		NULL,
+	"interest_rate"	VARCHAR(255)		NULL,
+	"reg_date"	       date	              NULL
+);
+
+ALTER TABLE ACCOUNT
+MODIFY ("status_cd" DEFAULT '1');
+
+CREATE DATABASE LINK JI
+CONNECT TO hr IDENTIFIED BY hr
+USING '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=172.31.9.170)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=XE)))';
+
+CREATE DATABASE LINK YJ
+CONNECT TO hr IDENTIFIED BY hr
+USING '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=172.31.9.179)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=XE)))';
+
+
+
 commit;

@@ -25,9 +25,7 @@
                 <textArea class="form-control" id="content" name="content" rows="10"></textArea>
               </div>
             </div>
-            <a href="${ pageContext.request.contextPath }/insertBoard.do">
-            <input type="button" value="문의하기" class="btn btn-primary mt-3" style="float: right;">
-            </a>
+            <input type="submit" value="문의하기" class="btn btn-primary mt-3" style="float: right;">
             <a class="btn btn-secondary mt-3" href="${ pageContext.request.contextPath }/getBoardList.do">목록으로</a>
         </form>
         </div>

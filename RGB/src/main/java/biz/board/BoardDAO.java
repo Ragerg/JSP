@@ -21,15 +21,17 @@ public class BoardDAO {
         sql.append("INSERT INTO BANK_BOARD (");
         sql.append("       TITLE,");
         sql.append("       CONTENT,");
+        sql.append("       USER_ID,");
         sql.append("       PARENT_ID");
-        sql.append(") VALUES (?, ?, ?)");
+        sql.append(") VALUES (?, ?, ?, ?)");
 
         try {
             conn = JDBCUtil.getConnection();
             stmt = conn.prepareStatement(sql.toString());
             stmt.setString(1, board.getTitle());
             stmt.setString(2, board.getContent());
-            stmt.setInt(3, board.getParent_id());
+            stmt.setString(3, board.getUser_id());
+            stmt.setInt(4, board.getParent_id());
 
             result = stmt.executeUpdate();
         } catch (Exception e) {
@@ -91,7 +93,7 @@ public class BoardDAO {
                 board.setUser_id(rs.getString("USER_ID"));
                 board.setName(rs.getString("NAME"));
                 board.setHits(rs.getInt("HITS"));
-                board.setReg_date(rs.getString("REG_DATE"));
+                board.setReg_date(rs.getDate("REG_DATE"));
                 board.setParent_id(rs.getInt("PARENT_ID"));
                 boardList.add(board);
             }
@@ -122,7 +124,7 @@ public class BoardDAO {
                 board.setName(rs.getString("NAME"));
                 board.setContent(rs.getString("CONTENT"));
                 board.setHits(rs.getInt("HITS"));
-                board.setReg_date(rs.getString("REG_DATE"));
+                board.setReg_date(rs.getDate("REG_DATE"));
                 board.setParent_id(rs.getInt("PARENT_ID"));
             }
         } catch (Exception e) {

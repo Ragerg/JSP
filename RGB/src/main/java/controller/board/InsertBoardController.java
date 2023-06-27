@@ -31,17 +31,21 @@ public class InsertBoardController implements Controller {
         board.setContent(content);
         board.setUser_id(user.getUser_id());
         board.setName(user.getUser_name());
+        System.out.println(board);
         int result = new BoardDAO().insertBoard(board);
 
         String msg = "";
         if (result == 1) {
             msg = "문의가 등록되었습니다.";
+            request.setAttribute("msg", msg);
+            request.setAttribute("url", "getBoardList.do");
+            return "/jsp/alert_success.jsp";
         } else {
             msg = "문의 등록에 실패하였습니다. 잠시후 다시 시도해주세요.";
+            request.setAttribute("msg", msg);
+            request.setAttribute("url", "getBoardList.do");
         }
-        request.setAttribute("msg", msg);
-        request.setAttribute("url", "getBoardList.do");
-        return "/jsp/etc/alert.jsp";
+        return "/jsp/alert_warning.jsp";
 
     }
 

@@ -1,5 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="biz.board.BoardVO"%>
+      <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   <!DOCTYPE html>
   <html>
@@ -18,8 +19,8 @@
          <table>
         <thead class="table-dark">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col" class="title" style="width: 45%;overflow: hidden">Title</th>
+                <th scope="col" style="width: 5%;">#</th>
+                <th scope="col" class="title" style="width: 55%;overflow: hidden">Title</th>
                 <th scope="col">Writer</th>
                 <th scope="col" class="date" style="width: 15%;">Date</th>
 <!--                 <th scope="col" class="hit" style="width: 10%;">Hit</th> -->
@@ -36,19 +37,23 @@
                             </c:forEach>
                             <i class="bi bi-arrow-return-right"></i>
                         </c:if>
-                        ${board.title }
+                        ${ board.title }
                         </td>
-                        <td>${board.name }</td>
-                        <td>${board.reg_date }</td>
+                        <td>${ board.user_id }</td>
+                        
+                        <td><fmt:formatDate value="${ board.reg_date }" pattern="yyyy-MM-dd" type="date"/></td>
+<%--                         <td>${ board.reg_date }</td> --%>
 <%--                         <td>${board.hits }</td> --%>
                     </tr>
             </c:forEach>
               </tbody>
               </table>
     <nav id = "paging" aria-label="Page navigation example">
+    		<c:if test="${ not empty user}">
             <a href="${ pageContext.request.contextPath }/insertBoardPage.do">
             <input type="button" value="문의하기" class="btn btn-primary mt-3" style="float: right;">
             </a>
+            </c:if>
         <ul class="pagination" style="justify-content: center;margin: 10px auto;">
             <li class="page-item <c:if test="${ vpage == 1 }"> disabled </c:if>">
                 <a class="page-link" href="${pageContext.request.contextPath }/getBoardList.do?vpage=${vpage - 1}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
