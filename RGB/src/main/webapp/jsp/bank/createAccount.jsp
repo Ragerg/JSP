@@ -1,5 +1,6 @@
 <%@page import="java.util.ArrayList" %>
   <%@page import="biz.board.BoardVO" %>
+   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       <!DOCTYPE html>
       <html>
@@ -11,7 +12,6 @@
       <body>
         <%@ include file="/jsp/include/header.jsp" %>
           <c:if test="${empty user}">
-<!--             <script>alert("로그인 후 진행해 주세요"); location.href = "loginPage.do";</script> -->
                 <script type="text/javascript">
 				$().ready(function () {
 				        Swal.fire({
@@ -53,6 +53,14 @@
                 </div>
 
 
+                <div class="mb-3">
+                  <label for="account_name">계좌이름</label>
+                  <input type="text" class="form-control" id="account_name" name="account_name" required="" value="${ product.product_name }" >
+                  <div class="invalid-feedback">
+                    계좌 구별이 편하게 이름을 지어주세요.
+                  </div>
+                </div>
+                
                 <div class="mb-3">
                   <label for="account_balance">입금금액</label>
                   <input type="text" class="form-control" id="account_balance" name="account_balance" required="" min="1000" value="1000" >

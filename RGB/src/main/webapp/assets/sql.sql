@@ -100,11 +100,18 @@ CREATE TABLE BANK_USER_ROLE (
 );
 
 INSERT INTO status VALUES('9', '탈퇴');
-INSERT INTO product(product_cd, product_name, interest_rate) VALUES('A', '일반 입출금통장', 3.2);
+INSERT INTO product(product_cd, product_name, interest_rate) VALUES('C', '여행은 알지 적금', 4.5);
 
 rollback;
 
 SELECT * FROM account;
+SELECT * FROM product;
+
+UPDATE product
+SET interest_rate = 1.40;
+
+
+
 COMMIT;
 
 ALTER TABLE BANK_USER_ROLE ADD CONSTRAINT "PK_ROLE" PRIMARY KEY (
@@ -115,11 +122,11 @@ ALTER TABLE BANK_USER ADD CONSTRAINT FK_BANK_USER_TO_BANK_USER_ROLE FOREIGN KEY 
 	ROLE_CD
 ) REFERENCES BANK_USER_ROLE(ROLE_CD);
 
-select * from status;
+select * from account;
 
 SELECT * FROM BANK_USER WHERE USER_ID = 'j.hyun123@kakao.comK' AND SIGNUP_TYPE = 'K';
 
-delete from account;
+select * from product;
 
 
 commit;
@@ -158,6 +165,45 @@ CREATE DATABASE LINK YJ
 CONNECT TO hr IDENTIFIED BY hr
 USING '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=172.31.9.179)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=XE)))';
 
+select * from TRANSACTION;
 
+delete account where account_no='999518928527';
 
 commit;
+
+CREATE SEQUENCE TRANS_SEQ
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+CREATE TABLE TRANSACTION (
+       TRANS_ID             NUMBER               DEFAULT TRANS_SEQ.NEXTVAL PRIMARY KEY,
+       bank_cd	       varchar2(3)          NOT NULL,
+       id	              varchar2(20)		NOT NULL,
+       MEMBER_NAME          varchar2(50)         NOT NULL,
+       TRANS_CD             varchar2(20)         NOT NULL,
+       TRANS_AMOUNT         NUMBER               NOT NULL,
+	TRANS_DATE           DATE                 DEFAULT TRUNC(SYSDATE),
+       TRANS_TIME           VARCHAR2(10)         DEFAULT TO_CHAR(SYSDATE, 'HH24:MI:SS'),
+       ACCOUNT_NO	       varchar2(100)		NOT NULL,
+	balance	       number(30)		NULL
+);
+
+select * from TRANSACTION where TRANS_ACCOUNT='999502420203' order by trans_no desc;
+
+INSERT INTO TRANSACTION(BANK_CD, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_ACCOUNT, TRANS_BALANCE ) 
+                 VALUES('999'  , '카카오'    , 'D'       ,  50000      , '999364791767'  , (select account_balance from account where account_no='999364791767'));
+INSERT INTO TRANSACTION(BANK_CD, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_ACCOUNT, TRANS_BALANCE ) 
+                 VALUES('999'  , '카카오'    , 'W'       ,  50000      , '999502420203'  , (select account_balance from account where account_no='999502420203'));
+                 
+select * from account;
+update account set account_balance= (account_balance-50000) where account_no='999502420203';
+update account set account_balance= (account_balance+50000) where account_no='999364791767';
+                 
+update TRANSACTION set TRANS_TYPE = 'W' where TRANS_ACCOUNT='999249566661';                 
+
+commit;
+select* FROM bank_user;
+
+SELECT B_NO, TITLE, CONTENT, REG_DATE, PARENT_ID, USER_ID, NAME, HITS
+FROM BANK_BOARD;

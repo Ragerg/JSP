@@ -12,6 +12,9 @@
     <div class="container">
     <div class="input-form col-md-12 mx-auto">
          <form class="validation-form" novalidate="" onsubmit="return submitForm()" action="${ pageContext.request.contextPath }/reBoard.do" method="post">
+          <c:if test="${board.user_id eq user}">
+        class="user-post"
+    </c:if>
             <h3 class="my-3 text-primary">${ board.title }</h3>
             <input type="hidden" name="b_no" value="${ board.b_no }" readonly>
             <input type="hidden" name="title" value="${ board.title }" readonly>

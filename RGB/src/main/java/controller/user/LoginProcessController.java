@@ -36,7 +36,7 @@ public class LoginProcessController implements Controller {
         UserVO user = new UserVO();
         user.setUser_id(id);
         user.setUser_pwd(password);
-        user.setSingup_type("W");
+        user.setSignup_type("W");
 
         UserDAO dao = new UserDAO();
 

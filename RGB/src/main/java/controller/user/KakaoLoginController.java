@@ -27,7 +27,7 @@ public class KakaoLoginController implements Controller {
             UserVO user = new UserVO();
             user.setUser_id(id);
             user.setUser_pwd("kakao");
-            user.setSingup_type("K");
+            user.setSignup_type("K");
             HttpSession session = request.getSession();
 
             user = dao.getUser(user);

@@ -55,7 +55,7 @@ public class UserDAO {
             stmt.setString(3, user.getUser_name());
             stmt.setString(4, user.getUser_birthday());
             stmt.setString(5, user.getPhone_no());
-            stmt.setString(6, user.getSingup_type());
+            stmt.setString(6, user.getSignup_type());
             stmt.setString(7, user.getPostcode());
             stmt.setString(8, user.getAddress());
             stmt.setString(9, user.getDetail_address());
@@ -82,7 +82,7 @@ public class UserDAO {
             stmt = conn.prepareStatement(sql.toString());
             stmt.setString(1, vo.getUser_id());
             stmt.setString(2, vo.getUser_pwd());
-            stmt.setString(3, vo.getSingup_type());
+            stmt.setString(3, vo.getSignup_type());
             rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -93,7 +93,7 @@ public class UserDAO {
                 user.setUser_name(rs.getString("USER_NAME"));
                 user.setUser_birthday(rs.getString("USER_BIRTHDAY"));
                 user.setPhone_no(rs.getString("PHONE_NO"));
-                user.setSingup_type(rs.getString("SIGNUP_TYPE"));
+                user.setSignup_type(rs.getString("SIGNUP_TYPE"));
                 user.setReg_date(rs.getString("REG_DATE"));
                 user.setPostcode(rs.getString("POSTCODE"));
                 user.setAddress(rs.getString("ADDRESS"));

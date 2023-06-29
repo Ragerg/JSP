@@ -1,6 +1,5 @@
 package biz.bank;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,70 +15,125 @@ public class BankDAO {
 	private Connection conn;
 	private PreparedStatement stmt;
 	private ResultSet rs;
-	
-//	private static String MONEY_INSERT = "UPDATE ACCOUNT SET ac_money = ac_money + ? WHERE ac_number = ?";
-//
-//	private static String GET_ACCOUNT = "select * from account where user_id=? ";
-//	
-//	private static String ID_CHECK = "select user_id from user_info where user_id = ? ";
-//
-//	private static String MEMBER_GET = "select * from user_info where user_id =? and password=?";
-
-	
-	
 
 	// 계좌개설
-    public int insertAccount(BankVO bank) {
-        int result = 0;
-        StringBuilder sql = new StringBuilder();
-        sql.append("INSERT INTO ACCOUNT (");
-        sql.append("       account_no,");
-        sql.append("       id,");
-        sql.append("       member_name,");
-        sql.append("       pd_cd,");
-        sql.append("       account_pw,");
-        sql.append("       account_balance");
-        sql.append(") VALUES (?, ?, ?, ?, ?, ?)");
+	public int insertAccount(BankVO bank) {
+		int result = 0;
+		StringBuilder sql = new StringBuilder();
+		sql.append("INSERT INTO ACCOUNT (");
+		sql.append("       account_no,");
+		sql.append("       id,");
+		sql.append("       member_name,");
+		sql.append("       pd_cd,");
+		sql.append("       account_pw,");
+		sql.append("       account_balance,");
+		sql.append("       account_name");
+		sql.append(") VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-        try {
-            conn = JDBCUtil.getConnection();
-            stmt = conn.prepareStatement(sql.toString());
-            stmt.setString(1, bank.getAccount_no());
-            stmt.setString(2, bank.getId());
-            stmt.setString(3, bank.getMember_name());
-            stmt.setString(4, bank.getPd_cd());
-            stmt.setString(5, bank.getAccount_pw());
-            stmt.setInt(6, bank.getAccount_balance());
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(sql.toString());
+			stmt.setString(1, bank.getAccount_no());
+			stmt.setString(2, bank.getId());
+			stmt.setString(3, bank.getMember_name());
+			stmt.setString(4, bank.getPd_cd());
+			stmt.setString(5, bank.getAccount_pw());
+			stmt.setLong(6, bank.getAccount_balance());
+			stmt.setString(7, bank.getAccount_name());
 
-            result = stmt.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            JDBCUtil.close(rs, stmt, conn);
-        }
-        return result;
-    }
-    
- // 계좌 중복확인
-    public boolean checkAccount(String account_no) {
-        boolean check = false;
-        String sql = "select * from ACCOUNT where account_no = ?";
+			result = stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+		return result;
+	}
 
-        try {
-            conn = JDBCUtil.getConnection();
-            stmt = conn.prepareStatement(sql.toString());
-            stmt.setString(1, account_no);
+	// 계좌 중복확인
+	public boolean checkAccount(String account_no) {
+		boolean check = false;
+		String sql = "select * from ACCOUNT where account_no = ?";
 
-            rs = stmt.executeQuery();
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(sql.toString());
+			stmt.setString(1, account_no);
 
-            if (rs.next()) {
-                check = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+			rs = stmt.executeQuery();
 
-        return check;
-    }
+			if (rs.next()) {
+				check = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return check;
+	}
+
+	// 내계좌 조회
+	public List<BankVO> getAccountList(String id) {
+		List<BankVO> accountList = new ArrayList<BankVO>();
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT * FROM ACCOUNT WHERE ID = ? AND STATUS_CD = 1");
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(sql.toString());
+			stmt.setString(1, id);
+
+			rs = stmt.executeQuery();
+
+			long totalBalance = 0L; // 총 잔액
+
+			while (rs.next()) {
+				BankVO account = new BankVO();
+				account.setAccount_no(rs.getString("account_no"));
+				account.setId(rs.getString("id"));
+				account.setMember_name(rs.getString("member_name"));
+				account.setBank_code(rs.getString("bank_code"));
+				account.setPd_cd(rs.getString("pd_cd"));
+				account.setAccount_pw(rs.getString("account_pw"));
+				account.setAccount_date(rs.getDate("account_date"));
+				account.setAccount_balance(rs.getLong("account_balance"));
+				account.setStatus_cd(rs.getString("status_cd"));
+				account.setAccount_name(rs.getString("account_name"));
+
+				accountList.add(account);
+
+				totalBalance += account.getAccount_balance(); // 총 잔액 누적
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return accountList;
+	}
+
+	// 계좌 상세 조회
+	public BankVO getAccount(String id) {
+		BankVO bank = null;
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT * FROM ACCOUNT WHERE ACCOUNT_NO = ?");
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(sql.toString());
+			stmt.setString(1, id);
+
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				bank = new BankVO();
+				bank.setAccount_no(rs.getString("ACCOUNT_NO"));
+				bank.setAccount_pw(rs.getString("ACCOUNT_PW"));
+				bank.setAccount_balance(rs.getLong("ACCOUNT_BALANCE"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bank;
+	}
+
 
 }

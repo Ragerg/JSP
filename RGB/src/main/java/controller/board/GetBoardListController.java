@@ -27,6 +27,8 @@ public class GetBoardListController implements Controller {
         request.setAttribute("boardList", boardList);
         request.setAttribute("total", total);
         request.setAttribute("lastPage", lastPage);
+        
+        System.out.println(boardList);
 
         return "/jsp/board/boardList.jsp";
     }

@@ -11,8 +11,9 @@ public class BankVO {
 	private String pd_cd;
 	private String account_pw;
 	private Date account_date;
-	private int account_balance;
+	private long account_balance;
 	private String status_cd;
+	private String account_name;
 
 	public BankVO() {
 		super();
@@ -20,7 +21,7 @@ public class BankVO {
 	}
 
 	public BankVO(String account_no, String id, String member_name, String bank_code, String pd_cd, String account_pw,
-			Date account_date, int account_balance, String status_cd) {
+			Date account_date, long account_balance, String status_cd, String account_name) {
 		super();
 		this.account_no = account_no;
 		this.id = id;
@@ -31,6 +32,7 @@ public class BankVO {
 		this.account_date = account_date;
 		this.account_balance = account_balance;
 		this.status_cd = status_cd;
+		this.account_name = account_name;
 	}
 
 	public String getAccount_no() {
@@ -89,11 +91,11 @@ public class BankVO {
 		this.account_date = account_date;
 	}
 
-	public int getAccount_balance() {
+	public long getAccount_balance() {
 		return account_balance;
 	}
 
-	public void setAccount_balance(int account_balance) {
+	public void setAccount_balance(long account_balance) {
 		this.account_balance = account_balance;
 	}
 
@@ -105,11 +107,20 @@ public class BankVO {
 		this.status_cd = status_cd;
 	}
 
+	public String getAccount_name() {
+		return account_name;
+	}
+
+	public void setAccount_name(String account_name) {
+		this.account_name = account_name;
+	}
+
 	@Override
 	public String toString() {
 		return "BankVO [account_no=" + account_no + ", id=" + id + ", member_name=" + member_name + ", bank_code="
 				+ bank_code + ", pd_cd=" + pd_cd + ", account_pw=" + account_pw + ", account_date=" + account_date
-				+ ", account_balance=" + account_balance + ", status_cd=" + status_cd + "]";
+				+ ", account_balance=" + account_balance + ", status_cd=" + status_cd + ", account_name=" + account_name
+				+ "]";
 	}
 
 }

@@ -8,7 +8,7 @@ public class UserVO {
     private String user_name;
     private String user_birthday;
     private String phone_no;
-    private String singup_type;
+    private String signup_type;
     private String reg_date;
     private String postcode;
     private String address;
@@ -17,7 +17,7 @@ public class UserVO {
     public String toString() {
         return "userVO [user_id=" + user_id + ", role_cd=" + role_cd + ", user_pwd=" + user_pwd + ", user_name="
                 + user_name + ", user_birthday=" + user_birthday + ", phone_no=" + phone_no + ", singup_type="
-                + singup_type + ", reg_date=" + reg_date + ", postcode=" + postcode + ", address=" + address
+                + signup_type + ", reg_date=" + reg_date + ", postcode=" + postcode + ", address=" + address
                 + ", detail_address=" + detail_address + "]";
     }
 
@@ -69,12 +69,12 @@ public class UserVO {
         this.phone_no = phone_no;
     }
 
-    public String getSingup_type() {
-        return singup_type;
+    public String getSignup_type() {
+        return signup_type;
     }
 
-    public void setSingup_type(String singup_type) {
-        this.singup_type = singup_type;
+    public void setSignup_type(String signup_type) {
+        this.signup_type = signup_type;
     }
 
     public String getReg_date() {
@@ -110,7 +110,7 @@ public class UserVO {
     }
 
     public UserVO(String user_id, String role_cd, String user_pwd, String user_name, String user_birthday,
-            String phone_no, String singup_type, String reg_date, String postcode, String address,
+            String phone_no, String signup_type, String reg_date, String postcode, String address,
             String detail_address) {
         super();
         this.user_id = user_id;
@@ -119,7 +119,7 @@ public class UserVO {
         this.user_name = user_name;
         this.user_birthday = user_birthday;
         this.phone_no = phone_no;
-        this.singup_type = singup_type;
+        this.signup_type = signup_type;
         this.reg_date = reg_date;
         this.postcode = postcode;
         this.address = address;

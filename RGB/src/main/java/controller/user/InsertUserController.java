@@ -29,7 +29,7 @@ public class InsertUserController implements Controller {
         user.setUser_name(request.getParameter("name"));
         user.setUser_birthday(request.getParameter("birthday"));
         user.setPhone_no(request.getParameter("phone"));
-        user.setSingup_type(signup_type);
+        user.setSignup_type(signup_type);
         user.setPostcode(request.getParameter("postcode"));
         user.setAddress(request.getParameter("address"));
         user.setDetail_address(request.getParameter("detailAddress"));

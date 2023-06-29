@@ -20,11 +20,15 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 	
 	<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+	 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<body>
 	<script src="/RGB/assets/script.js" defer></script>
 	<script src="/RGB/assets/main.js" defer></script>
 	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -80,7 +84,7 @@
 								<%--일반 사용자--%>
 									<c:otherwise>
 										<li class="nav-item">
-											<a class="nav-link text-dark" href="javascript:void(0)">내계좌</a>
+											<a class="nav-link text-dark" href="${ pageContext.request.contextPath }/myAccount.do">내계좌</a>
 										</li>
 										<li class="nav-item">
 											<a class="nav-link text-dark" href="javascript:void(0)">오픈뱅킹</a>
