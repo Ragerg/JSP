@@ -70,7 +70,7 @@ public class BoardDAO {
         sql.append("  FROM (");
         sql.append("  SELECT m.*, ROWNUM AS RN");
         sql.append("  FROM (");
-        sql.append("              SELECT LEVEL, B_NO, TITLE, CONTENT, REG_DATE, PARENT_ID, USER_ID, NAME, HITS");
+        sql.append("              SELECT LEVEL, B_NO, TITLE, CONTENT, REG_DATE, PARENT_ID, USER_ID, NAME");
         sql.append("                FROM BANK_BOARD");
         sql.append("               START WITH PARENT_ID = 0");
         sql.append("             CONNECT BY PRIOR B_NO = PARENT_ID");
@@ -92,7 +92,6 @@ public class BoardDAO {
                 board.setTitle(rs.getString("TITLE"));
                 board.setUser_id(rs.getString("USER_ID"));
                 board.setName(rs.getString("NAME"));
-                board.setHits(rs.getInt("HITS"));
                 board.setReg_date(rs.getDate("REG_DATE"));
                 board.setParent_id(rs.getInt("PARENT_ID"));
                 boardList.add(board);
@@ -123,7 +122,6 @@ public class BoardDAO {
                 board.setUser_id(rs.getString("USER_ID"));
                 board.setName(rs.getString("NAME"));
                 board.setContent(rs.getString("CONTENT"));
-                board.setHits(rs.getInt("HITS"));
                 board.setReg_date(rs.getDate("REG_DATE"));
                 board.setParent_id(rs.getInt("PARENT_ID"));
             }

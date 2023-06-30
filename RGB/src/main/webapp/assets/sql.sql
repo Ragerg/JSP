@@ -207,3 +207,164 @@ select* FROM bank_user;
 
 SELECT B_NO, TITLE, CONTENT, REG_DATE, PARENT_ID, USER_ID, NAME, HITS
 FROM BANK_BOARD;
+
+--------------------------
+--프로시저
+--------------------------
+ create or replace NONEDITIONABLE PROCEDURE P_Transaction(
+
+       --//출금계좌     
+       W_Trans_Account IN VARCHAR2,
+       --//출금은행 코드
+       W_Bank_cd IN VARCHAR2,
+       --//보내는사람 이름
+       D_Trans_name IN VARCHAR2,
+       --//입금계좌
+       D_Trans_Account IN VARCHAR2,
+       --//입금은행 코드
+       D_Bank_cd IN CHAR,
+       --//받는사람 이름
+       W_Trans_name IN VARCHAR2,
+       --//거래 금액
+       W_Trans_amount IN NUMBER,
+       --결과값
+       v_result OUT NUMBER
+) AS
+       --출금계좌 잔액
+       W_balance NUMBER;
+       --입금계좌 잔액
+       D_balance NUMBER;
+BEGIN
+
+       CASE W_Bank_cd
+       --출금 은행이 RG일때
+       WHEN '999' THEN
+           -- 출금 계좌의 잔액 확인
+           SELECT ACCOUNT_BALANCE INTO W_balance
+           FROM ACCOUNT
+           WHERE ACCOUNT_NO = W_Trans_Account;
+
+           -- 이체 금액이 출금 계좌 잔액보다 큰지 확인
+           IF W_Trans_amount  > W_balance  THEN
+               RAISE_APPLICATION_ERROR(-20001, '잔액이 부족합니다.');
+           END IF;
+
+           -- 출금 계좌 잔액 업데이트
+           UPDATE ACCOUNT
+           SET ACCOUNT_BALANCE = ACCOUNT_BALANCE - W_Trans_amount
+           WHERE ACCOUNT_NO = W_Trans_Account;
+
+           -- 로그 테이블에 출금 기록 추가
+           INSERT INTO TRANSACTION (BANK_CD, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_ACCOUNT, TRANS_BALANCE)
+           VALUES (W_Bank_cd, W_Trans_name, 'W', W_Trans_amount, W_Trans_Account, (SELECT ACCOUNT_BALANCE FROM ACCOUNT WHERE ACCOUNT_NO = W_Trans_Account));    
+
+       --출금 은행이 NINI일때 
+       WHEN '333' THEN    
+           -- 출금 계좌의 잔액 확인
+           SELECT ACCOUNT_BALANCE INTO W_balance
+           FROM ACCOUNT@JI
+           WHERE ACCOUNT_NO = W_Trans_Account;
+
+           -- 이체 금액이 출금 계좌 잔액보다 큰지 확인
+           IF W_Trans_amount > W_balance THEN
+               RAISE_APPLICATION_ERROR(-20001, '잔액이 부족합니다.');
+           END IF;
+
+           -- 출금 계좌 잔액 업데이트
+           UPDATE ACCOUNT@JI
+           SET ACCOUNT_BALANCE = ACCOUNT_BALANCE - W_Trans_amount
+           WHERE ACCOUNT_NO = W_Trans_Account;
+
+            -- 로그 테이블에 출금 기록 추가
+           INSERT INTO TRANSACTION_HISTORY@JI (TRANSACTION_ID, ACCOUNT_NUMBER, TRANSACTION_DATE, TRANSACTION_TYPE, AMOUNT ,BANK_CODE, SENDER_NAME, RECIPIENT_NAME)
+           VALUES (W_Trans_Account, D_Trans_Account, SYSDATE, '출금', W_Trans_amount, W_Bank_cd, D_Trans_name, W_Trans_name);
+
+       --출금 은행이 YJ 뱅크일때 
+       WHEN '777' THEN    
+           -- 출금 계좌의 잔액 확인
+           SELECT ACCOUNT_BALANCE INTO W_balance
+           FROM ACCOUNT@YJ
+           WHERE ACCOUNT_NO = W_Trans_Account;
+
+           -- 이체 금액이 출금 계좌 잔액보다 큰지 확인
+           IF W_Trans_amount  > W_balance  THEN
+               RAISE_APPLICATION_ERROR(-20001, '잔액이 부족합니다.');
+           END IF;
+
+           -- 출금 계좌 잔액 업데이트
+           UPDATE ACCOUNT@YJ
+           SET ACCOUNT_BALANCE = ACCOUNT_BALANCE - W_Trans_amount
+           WHERE ACCOUNT_NO = W_Trans_Account;
+
+            -- 로그 테이블에 출금 기록 추가
+           INSERT INTO TRANSACTION@YJ (ACCOUNT_CODE, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_ACCOUNT, TRANS_BALANCE)
+           VALUES (W_Bank_cd, W_Trans_name, 'withdraw', W_Trans_amount, W_Trans_Account, (SELECT ACCOUNT_BALANCE FROM ACCOUNT@YJ WHERE ACCOUNT_NO = W_Trans_Account));
+
+       END CASE;
+           
+
+       CASE W_Bank_cd
+       --입금 은행이 RG일때 
+       WHEN '999' THEN
+           -- 입금 계좌의 잔액 확인
+           SELECT ACCOUNT_BALANCE INTO D_balance
+           FROM ACCOUNT
+           WHERE ACCOUNT_NO = D_Trans_Account;
+
+           -- 입금 계좌 잔액 업데이트
+           UPDATE ACCOUNT
+           SET ACCOUNT_BALANCE = ACCOUNT_BALANCE + W_Trans_amount
+           WHERE ACCOUNT_NO = D_Trans_Account;
+
+           -- 로그 테이블에 입금 기록 추가
+           INSERT INTO TRANSACTION (BANK_CD, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_ACCOUNT, TRANS_BALANCE)
+           VALUES (D_Bank_cd, D_Trans_name, 'D', W_Trans_amount, D_Trans_Account ,(SELECT ACCOUNT_BALANCE FROM ACCOUNT WHERE ACCOUNT_NO = D_Trans_Account));
+
+
+       --입금 은행이 NINI일때 
+       WHEN '333' THEN    
+           -- 입금 계좌의 잔액 확인
+           SELECT ACCOUNT_BALANCE INTO D_balance
+           FROM ACCOUNT@JI
+           WHERE ACCOUNT_NO = D_Trans_Account;
+
+           -- 입금 계좌 잔액 업데이트
+           UPDATE ACCOUNT@JI
+           SET ACCOUNT_BALANCE = ACCOUNT_BALANCE + W_Trans_amount
+           WHERE ACCOUNT_NO = D_Trans_Account;
+
+           -- 로그 테이블에 입금 기록 추가
+           INSERT INTO TRANSACTION_HISTORY@JI (TRANSACTION_ID, ACCOUNT_NUMBER, TRANSACTION_DATE, TRANSACTION_TYPE, AMOUNT ,BANK_CODE, SENDER_NAME, RECIPIENT_NAME)
+           VALUES (D_Trans_Account, W_Trans_Account, SYSDATE, '입금', W_Trans_amount, D_Bank_cd, W_Trans_name, D_Trans_name);
+
+       --입금 은행이 YJ일때 
+       WHEN '777' THEN           
+           -- 입금 계좌의 잔액 확인
+           SELECT ACCOUNT_BALANCE INTO D_balance
+           FROM ACCOUNT@YJ
+           WHERE ACCOUNT_NO = D_Trans_Account;
+
+           -- 입금 계좌 잔액 업데이트
+           UPDATE ACCOUNT@YJ
+           SET ACCOUNT_BALANCE = ACCOUNT_BALANCE + W_Trans_amount
+           WHERE ACCOUNT_NO = D_Trans_Account;
+
+           -- 로그 테이블에 입금 기록 추가
+           INSERT INTO TRANSACTION@YJ (ACCOUNT_CODE, TRANS_NAME, TRANS_TYPE, TRANS_AMOUNT, TRANS_ACCOUNT, TRANS_BALANCE)
+           VALUES (D_Bank_cd, D_Trans_name, 'deposit', W_Trans_amount, D_Trans_Account ,(SELECT ACCOUNT_BALANCE FROM ACCOUNT@YJ WHERE ACCOUNT_NO = D_Trans_Account)); 
+       END CASE;
+
+
+    v_result := 1;
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        v_result := 0;
+        RAISE;
+END;
+/
+
+
+
+

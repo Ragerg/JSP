@@ -1,5 +1,4 @@
 window.onload = function () {
-
   // 비밀번호 확인체크
   let checkPassword = document.getElementById("checkPassword");
   checkPassword.addEventListener("change", function () {
@@ -137,27 +136,45 @@ function daumPostcode() {
       }
     },
   }).open();
-  
-  // 3자리마다 ,
-  function addCommas(input) {
-  // 입력된 값을 가져옵니다.
-  let value = input.value;
-
-  // 쉼표를 제거한 숫자 문자열을 생성합니다.
-  let numberString = value.replace(/,/g, '');
-
-  // 세 자리마다 쉼표를 추가합니다.
-  let numberWithCommas = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-  // 쉼표가 추가된 값을 입력 필드에 할당합니다.
-  input.value = numberWithCommas;
 }
-  
-  
-  
-  
-  
-  
-  
-  
+
+//이체금액, 계좌 잔고 비교
+$(document).ready(function () {
+  $("#trans_amount").on("input", function () {
+    var transAmount = parseFloat($(this).val().replace(/,/g, ""));
+    var accountBalance = parseFloat(
+      $("#account_balance").val().replace(/,/g, "")
+    );
+
+    if (transAmount > accountBalance) {
+      $("#balance_error").text(" 출금계좌 잔고 부족").show();
+    } else {
+      $("#balance_error").hide();
+    }
+  });
+});
+
+// 받는 사람 이름 조회
+function checkAccount() {
+  let toAccount = $("#toAccount").val();
+  let bank_code = $("#bank_code").val();
+
+  $.ajax({
+    url: "/RGB/checkToName.do",
+    method: "POST",
+    data: { toAccount: toAccount, bank_code: bank_code },
+    success: function (response) {
+      console.log(response);
+      if (response.trim() === "") {
+        $("#result").text("계좌가 존재하지 않습니다.");
+        $("#toName").val(" ");
+      } else {
+        $("#result").text("");
+        $("#toName").val(response);
+      }
+    },
+    error: function () {
+      $("#result").text("계좌 확인 중 오류가 발생했습니다.");
+    },
+  });
 }

@@ -53,18 +53,19 @@
                     <label for="trans_amount">이체금액</label>
                     <input type="text" class="form-control" id="trans_amount" name="trans_amount" required=""
                         value="">
+                     <div id="balance_error" class="error-message" style="color: red; font-size:13px"></div> 
                 </div>
 
                 <div class="mb-3">
                     <label for="toAccount">입금계좌</label>
                     <div class="d-flex">
-                        <select class="form-control col-md-3" required="" name="bank_code">
+                        <select class="form-control col-md-3" required="" id="bank_code" name="bank_code" onchange="checkAccount()">
                             <option value="999">RG Bank</option>
                             <option value="333">NiNi Bank</option>
                             <option value="777">YJ Bank</option>
                         </select>
                         <div style="width:50px"> </div>
-                        <input type="text" class="form-control col-md-8 mb-1" id="toAccount" name="toAccount" required="">
+                        <input type="text" class="form-control col-md-8 mb-1" id="toAccount" name="toAccount" required=""  onkeyup="checkAccount()">
                     </div>
                 </div>
 
@@ -78,6 +79,7 @@
                 <div class="mb-3">
                     <label for="toName">받는 사람 이름</label>
                     <input type="text" class="form-control" id="toName" name="toName" required="">
+                    <div id="result" class="error-message" style="color: red; font-size:13px"></div> 
                 </div>
 
                 <hr class="mb-4">

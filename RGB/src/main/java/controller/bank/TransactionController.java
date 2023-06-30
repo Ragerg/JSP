@@ -40,7 +40,7 @@ public class TransactionController implements Controller {
         transD.setTrans_Account(toAccount);
         
         TransactionVO transW = new TransactionVO();
-        transW.setBank_cd("999");
+        transW.setBank_cd(fromAccount.substring(0, 3));
         transW.setTrans_name(toName);
         transW.setTrans_type("W");
         transW.setTrans_amount(trans_amount);
