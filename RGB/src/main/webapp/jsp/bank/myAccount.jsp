@@ -11,9 +11,9 @@
 
     <section class="section">
         <div class="container" style="max-width: 600px;">
-<!--         <form method="post"> -->
-<!--             <input type="submit" class="col btn btn btn-primary" id="openBank" name="openBank" value="타은행 연결" style="float: right;" -->
-<%--                      formaction="${ pageContext.request.contextPath }/openBank.do"> --%>
+        <form method="post">
+            <input type="submit" class="col btn btn btn-primary" id="openBank" name="openBank" value="타은행 계좌보기" style="float: right;"
+                     formaction="${ pageContext.request.contextPath }/openBank.do">
         </form>             
             <h1 class="my-3 text-primary">${ user.user_name }님</h1>
             <h3 class="my-3 text-primary">총 잔액 : 
@@ -24,12 +24,6 @@
                     <div class="card-header text-bg-warning ">
                         <h5 class="card-title">
                         <c:choose>
-						<c:when test="${ account.bank_code == '333' }">
-                        NiNi Bank | 
-                        </c:when>
-						<c:when test="${ account.bank_code == '777' }">
-                        YJ Bank | 
-                        </c:when>
 						<c:when test="${ account.bank_code == '999' }">
                         RG Bank | 
                         </c:when>
@@ -46,7 +40,7 @@
                         <h3>
                             &#8361; <fmt:formatNumber value="${ account.account_balance }" pattern="#,###" />
                         </h3>
-                        <form method="post">
+                        <form method="post" >
                             <input type="hidden" name="account_no" value="${ account.account_no }">
                             <input type="hidden" name="account_name" value="${ account.account_name }">
                             <div class="row">
@@ -93,6 +87,7 @@
             modal.show();
         }
     </script>
+    
     <!-- Modal -->
     <div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -108,5 +103,6 @@
             </div>
         </div>
     </div>
+    
 </body>
 </html>

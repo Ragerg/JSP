@@ -140,11 +140,17 @@ public class BankDAO {
 	public List<BankVO> openBank(UserVO user) {
 		List<BankVO> accountList = new ArrayList<BankVO>();
 		StringBuilder sql = new StringBuilder();
-		sql.append(" SELECT account_no, id, bank_code, ");
+		sql.append(" SELECT to_char(account_no) as account_no, id, bank_code, ");
 		sql.append("  CASE WHEN product_id = '5' THEN 'Y' ELSE 'Z' END as pd_cd, ");
-		sql.append("  account_pw, ac_op_date as account_date, account_balance, '1' as status_cd, member_name, account_name");
+		sql.append("  to_char(account_pw) as account_pw, ac_op_date as account_date, account_balance, '1' as status_cd, member_name, account_name");
 		sql.append(" FROM account @JI");
 		sql.append(" WHERE id = (SELECT ID FROM users @JI WHERE NAME= ? AND BIRTH= ? AND PHONE= ?)");
+		sql.append(" union all");
+		sql.append(" SELECT account_no, id, to_char(account_code) as bank_code, ");
+		sql.append("  CASE WHEN account_type = 'I' THEN 'Z' ELSE 'I' END as pd_cd, ");
+		sql.append("  account_pw, account_date, account_balance, '1' as status_cd, member_name, ' ' as account_name");
+		sql.append(" FROM account @YJ");
+		sql.append(" WHERE id = (SELECT ID FROM BANK_USERS @YJ WHERE NAME=? AND BIRTHDATE=? AND PHONE=?) AND account_type != 'L' AND ACCOUNT_CODE = '777'");
 		
 		try {
 			conn = JDBCUtil.getConnection();
@@ -152,6 +158,9 @@ public class BankDAO {
 			stmt.setString(1, user.getUser_name());
 			stmt.setString(2, user.getUser_birthday());
 			stmt.setString(3, user.getPhone_no().replace("-", ""));
+			stmt.setString(4, user.getUser_name());
+			stmt.setString(5, user.getUser_birthday());
+			stmt.setString(6, user.getPhone_no().replace("-", ""));
 
 			rs = stmt.executeQuery();
 
@@ -180,6 +189,31 @@ public class BankDAO {
 		}
 		return accountList;
 	}
+	
+	// 오픈뱅킹 상세 조회
+		public BankVO openBanking(String account_no) {
+			BankVO bank = null;
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM account @JI WHERE ACCOUNT_NO = ?");
+			try {
+				conn = JDBCUtil.getConnection();
+				stmt = conn.prepareStatement(sql.toString());
+				stmt.setString(1, account_no);
+
+				rs = stmt.executeQuery();
+
+				if (rs.next()) {
+					bank = new BankVO();
+					bank.setAccount_no(rs.getString("ACCOUNT_NO"));
+					bank.setAccount_pw(rs.getString("ACCOUNT_PW"));
+					bank.setAccount_balance(rs.getLong("ACCOUNT_BALANCE"));
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return bank;
+		}
 	
 	
 	

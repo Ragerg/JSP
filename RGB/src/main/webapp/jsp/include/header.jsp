@@ -86,9 +86,9 @@
 										<li class="nav-item">
 											<a class="nav-link text-dark" href="${ pageContext.request.contextPath }/myAccount.do">내계좌</a>
 										</li>
-										<li class="nav-item">
-											<a class="nav-link text-dark" href="${ pageContext.request.contextPath }/openBank.do">오픈뱅킹</a>
-										</li>
+<!-- 										<li class="nav-item"> -->
+<!-- 											<a class="nav-link text-dark" href="href="javascript:void(0)">오픈뱅킹</a> -->
+<!-- 										</li> -->
 										<li class="nav-item">
 											<a class="nav-link text-dark" href="${ pageContext.request.contextPath }/logout.do" >로그아웃</a>
 										</li>

@@ -11,9 +11,9 @@
 
     <section class="section">
         <div class="container" style="max-width: 600px;">
-<!--         <form method="post"> -->
-<!--             <input type="submit" class="col btn btn btn-primary" id="openBank" name="openBank" value="타은행 연결" style="float: right;" -->
-<%--                      formaction="${ pageContext.request.contextPath }/openBank.do"> --%>
+        <form method="post">
+            <input type="submit" class="col btn btn btn-primary" id="openBank" name="openBank" value="RG은행 계좌보기" style="float: right;"
+                     formaction="${ pageContext.request.contextPath }/myAccount.do">
         </form>             
             <h1 class="my-3 text-primary">${ user.user_name }님</h1>
             <h3 class="my-3 text-primary">총 잔액 : 
@@ -30,9 +30,6 @@
 						<c:when test="${ account.bank_code == '777' }">
                         YJ Bank | 
                         </c:when>
-						<c:when test="${ account.bank_code == '999' }">
-                        RG Bank | 
-                        </c:when>
                         </c:choose>
                         ${ account.account_name }</h5>
                         <h6 class="card-subtitle mb-2 text-muted" style="height: 20px">
@@ -46,16 +43,17 @@
                         <h3>
                             &#8361; <fmt:formatNumber value="${ account.account_balance }" pattern="#,###" />
                         </h3>
-                        <form method="post">
+                        <form method="post" >
                             <input type="hidden" name="account_no" value="${ account.account_no }">
                             <input type="hidden" name="account_name" value="${ account.account_name }">
+                            <input type="hidden" name="bank_code" value="${ account.bank_code }">
                             <div class="row">
                                 <input type="submit" class="col btn btn btn-primary" value="거래내역"
-                                    formaction="${ pageContext.request.contextPath }/transList.do">
-                                <c:if test="${ account.pd_cd != 'C' && account.pd_cd != 'Z'  }">
+                                    formaction="${ pageContext.request.contextPath }/transList2.do">
+                                <c:if test="${ account.pd_cd != 'Z'  }">
                                     <div style="width: 10px"></div>
                                     <input type="submit" class="col ms-3 btn btn-primary" value="이체하기"
-                                        formaction="${ pageContext.request.contextPath }/transPage.do">
+                                        formaction="${ pageContext.request.contextPath }/transPage2.do">
                                 </c:if>
                             </div>
                         </form>
@@ -108,5 +106,6 @@
             </div>
         </div>
     </div>
+    
 </body>
 </html>

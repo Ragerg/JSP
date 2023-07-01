@@ -25,6 +25,8 @@ public class TransactionDAO {
     public int Transaction(TransactionVO transD, TransactionVO transW) {
         int result = 0;
         StringBuilder sql = new StringBuilder();
+        System.out.println("D: " + transD);
+        System.out.println("W: " + transW);
         sql.append("{call P_Transaction(?, ?, ?, ?, ?, ?, ?, ?) }");
         try {
             conn = JDBCUtil.getConnection();
@@ -82,6 +84,57 @@ public class TransactionDAO {
     			trans.setTrans_balance(rs.getLong("TRANS_BALANCE"));
     			trans.setTrans_type(rs.getString("TRANS_TYPE"));
     			transList.add(trans);
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	return transList;
+    }
+    
+    //오픈거래내역 리스트
+    public List<TransactionVO> getOpenTransList(String bank_code, String account_no) {
+    	List<TransactionVO> transList = new ArrayList<TransactionVO>();
+    	StringBuilder sql = new StringBuilder();
+    	
+    	switch (bank_code) {
+        case "333":
+	    	sql.append("WITH temp AS (");
+	    	sql.append(" SELECT TRANSACTION_DATE as Trans_date, TRANSACTION_TYPE as Trans_type, SENDER_NAME as Trans_name, AMOUNT as Trans_amount,");
+	    	sql.append(" LAG(AMOUNT) OVER (ORDER BY TRANSACTION_DATE DESC) AS PREV_AMOUNT, a.ACCOUNT_BALANCE");
+	    	sql.append("  FROM ACCOUNT@JI a JOIN TRANSACTION_HISTORY@JI th ON a.ACCOUNT_NO = th.TRANSACTION_ID");
+	    	sql.append(" WHERE a.ACCOUNT_NO =?)");
+	    	sql.append(" SELECT Trans_date, Trans_type, Trans_name, Trans_amount,");
+	    	sql.append(" CASE WHEN ROW_NUMBER() OVER (ORDER BY Trans_date DESC) = 1 THEN ACCOUNT_BALANCE");
+	    	sql.append(" ELSE ACCOUNT_BALANCE - SUM(CASE");
+	    	sql.append(" WHEN Trans_type = '출금' THEN -PREV_AMOUNT");
+	    	sql.append(" ELSE PREV_AMOUNT END) OVER (ORDER BY Trans_date DESC) END AS Trans_balance");
+	    	sql.append(" FROM temp ORDER BY Trans_date DESC");
+    	 break;
+        case "777":
+        	sql.append("SELECT *");
+        	sql.append("  FROM TRANSACTION @YJ");
+        	sql.append(" WHERE TRANS_ACCOUNT=?");
+        	sql.append(" ORDER BY TRANS_DATE DESC");
+        	 break;
+        }
+    	try {
+    		conn = JDBCUtil.getConnection();
+    		stmt = conn.prepareStatement(sql.toString());
+    		stmt.setString(1, account_no);
+    		
+    		rs = stmt.executeQuery();
+    		
+    		System.out.println(sql);
+    		
+    		while (rs.next()) {
+    			TransactionVO trans = new TransactionVO();
+    			trans.setTrans_date(rs.getDate("Trans_date"));
+    			trans.setTrans_name(rs.getString("Trans_name"));
+    			trans.setTrans_amount(rs.getLong("Trans_amount"));
+    			trans.setTrans_balance(rs.getLong("Trans_balance"));
+    			trans.setTrans_type(rs.getString("Trans_type"));
+    			transList.add(trans);
+    			System.out.println(trans);
     		}
     	} catch (Exception e) {
     		e.printStackTrace();

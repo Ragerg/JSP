@@ -26,7 +26,7 @@ public class MyAccountController implements Controller {
         List<BankVO> accountList = new BankDAO().getAccountList(id);
 
      // 총 잔액 계산
-        int totalBalance = 0;
+        long totalBalance = 0;
         for (BankVO account : accountList) {
             totalBalance += account.getAccount_balance();
         }

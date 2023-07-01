@@ -25,7 +25,7 @@ public class OpenBankController implements Controller {
         List<BankVO> accountList = new BankDAO().openBank(user);
 
      // 총 잔액 계산
-        int totalBalance = 0;
+        long totalBalance = 0;
         for (BankVO account : accountList) {
             totalBalance += account.getAccount_balance();
         }

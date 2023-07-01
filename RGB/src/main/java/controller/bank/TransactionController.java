@@ -29,6 +29,10 @@ public class TransactionController implements Controller {
 		String fromName = request.getParameter("fromName");
 		String toName = request.getParameter("toName");
 		
+		System.out.println(fromAccount.substring(0, 3));
+		System.out.println(trans_amount);
+		System.out.println("W: " + fromAccount);
+		
 		HttpSession session = request.getSession();
         UserVO user = (UserVO) session.getAttribute("user");
         
@@ -45,6 +49,7 @@ public class TransactionController implements Controller {
         transW.setTrans_type("W");
         transW.setTrans_amount(trans_amount);
         transW.setTrans_Account(fromAccount);
+        
         
         int result = new TransactionDAO().Transaction(transD, transW);
         
